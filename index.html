@@ -515,18 +515,32 @@
     });
 
     // Waitlist form submission
+    const SUPABASE_URL = 'https://cuhhcwqquvspyinhxgzk.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1aGhjd3FxdXZzcHlpbmh4Z3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwMzI0NzMsImV4cCI6MjA4OTYwODQ3M30.sTyavLJtmyOiFNIHM-cqk08MOXlsf3W_3pnm7P5sx98';
+
     async function submitWaitlist(form, successEl) {
       const email = form.querySelector('input[type="email"]').value;
       const btn = form.querySelector('button');
       btn.disabled = true;
       btn.textContent = 'Sending...';
       try {
-        await fetch('https://formspree.io/f/infoathletizer@gmail.com', {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal',
+          },
           body: JSON.stringify({ email }),
         });
-      } catch (e) {}
+        if (!res.ok && res.status !== 409) throw new Error();
+      } catch (e) {
+        btn.disabled = false;
+        btn.textContent = 'Notify Me →';
+        alert('Something went wrong. Please try again.');
+        return;
+      }
       form.style.display = 'none';
       successEl.classList.add('show');
       document.querySelector('.waitlist-note') && (document.querySelector('.waitlist-note').style.display = 'none');
