@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Athletizer — Find Your Game. Play Tonight.</title>
   <meta name="description" content="Athletizer connects players with local pickup soccer games in their city. Find a game, book your spot, and play tonight." />
+  <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -37,7 +38,7 @@
       border-bottom: 1px solid var(--border); transition: padding 0.3s;
     }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { height: 36px; width: auto; filter: invert(1) brightness(10); }
+    .nav-logo img { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; }
     .nav-logo span { font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
     .nav-cta {
       background: var(--green); color: white; border: none;
@@ -266,7 +267,7 @@
       flex-wrap: wrap; gap: 24px;
     }
     .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .footer-logo img { height: 28px; filter: invert(1) brightness(10); opacity: 0.6; }
+    .footer-logo img { height: 28px; filter: invert(1); mix-blend-mode: screen; opacity: 0.6; }
     .footer-logo span { font-size: 16px; font-weight: 800; color: var(--muted); }
     .footer-links { display: flex; gap: 32px; }
     .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
