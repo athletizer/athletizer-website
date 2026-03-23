@@ -38,7 +38,9 @@
       border-bottom: 1px solid var(--border); transition: padding 0.3s;
     }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { height: 36px; width: auto; filter: invert(1); mix-blend-mode: screen; }
+    .nav-logo img { display: none; }
+    .nav-logo-text { font-size: 22px; font-weight: 900; letter-spacing: -1px; color: var(--text); }
+    .nav-logo-text span { color: var(--green-light); }
     .nav-logo span { font-size: 20px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; }
     .nav-cta {
       background: var(--green); color: white; border: none;
@@ -267,7 +269,9 @@
       flex-wrap: wrap; gap: 24px;
     }
     .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .footer-logo img { height: 28px; filter: invert(1); mix-blend-mode: screen; opacity: 0.6; }
+    .footer-logo img { display: none; }
+    .footer-logo-text { font-size: 18px; font-weight: 900; letter-spacing: -0.5px; color: var(--muted); }
+    .footer-logo-text span { color: var(--green-light); }
     .footer-logo span { font-size: 16px; font-weight: 800; color: var(--muted); }
     .footer-links { display: flex; gap: 32px; }
     .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
@@ -297,7 +301,7 @@
   <nav>
     <a href="#" class="nav-logo">
       <img src="logo.png" alt="Athletizer" />
-      <span>Athletizer</span>
+      <span class="nav-logo-text"><span>A</span>thletizer</span>
     </a>
     <a href="#waitlist" class="nav-cta">Get Early Access</a>
   </nav>
@@ -490,7 +494,7 @@
   <footer>
     <a href="#" class="footer-logo">
       <img src="logo.png" alt="Athletizer" />
-      <span>Athletizer</span>
+      <span class="footer-logo-text"><span>A</span>thletizer</span>
     </a>
     <div class="footer-links">
       <a href="mailto:infoathletizer@gmail.com">Contact</a>
