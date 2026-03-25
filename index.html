@@ -136,6 +136,20 @@
     .waitlist-success.show { display: flex; }
     .waitlist-note { font-size: 12px; color: var(--muted); margin-top: 12px; position: relative; }
 
+    /* APP STORE BADGES */
+    .store-badges { display: flex; gap: 12px; margin-top: 32px; justify-content: center; flex-wrap: wrap; position: relative; }
+    .store-badge {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; padding: 10px 20px; text-decoration: none; color: var(--text);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .store-badge:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); transform: translateY(-2px); }
+    .store-badge-icon { font-size: 24px; line-height: 1; }
+    .store-badge-text { display: flex; flex-direction: column; }
+    .store-badge-sub { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .store-badge-name { font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+
     /* VALUE PROPS STRIP */
     .props-strip {
       background: var(--dark2);
@@ -281,6 +295,23 @@ footer { flex-direction: column; text-align: center; padding: 32px 20px; }
       <span>✅</span> You're on the list! We'll let you know when we launch.
     </div>
     <p class="waitlist-note">Be the first to know when Athletizer drops. No spam, ever.</p>
+
+    <div class="store-badges">
+      <a href="#" class="store-badge">
+        <span class="store-badge-icon">🍎</span>
+        <span class="store-badge-text">
+          <span class="store-badge-sub">Download on the</span>
+          <span class="store-badge-name">App Store</span>
+        </span>
+      </a>
+      <a href="#" class="store-badge">
+        <span class="store-badge-icon">▶</span>
+        <span class="store-badge-text">
+          <span class="store-badge-sub">Get it on</span>
+          <span class="store-badge-name">Google Play</span>
+        </span>
+      </a>
+    </div>
 
     <div class="hero-scroll">
       <div class="hero-scroll-line"></div>
