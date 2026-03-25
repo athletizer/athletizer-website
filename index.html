@@ -220,6 +220,36 @@
     .feature h3 { font-size: 19px; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.3px; }
     .feature p { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
+    /* MODAL */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--dark2); border: 1px solid var(--border);
+      border-radius: 20px; max-width: 680px; width: 100%;
+      max-height: 80vh; display: flex; flex-direction: column;
+    }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 32px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .modal-header h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+    .modal-close {
+      background: none; border: none; color: var(--muted); font-size: 24px;
+      cursor: pointer; padding: 0 4px; line-height: 1; transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-body {
+      padding: 28px 32px; overflow-y: auto; font-size: 14px;
+      color: var(--muted); line-height: 1.8;
+    }
+    .modal-body h3 { font-size: 14px; font-weight: 700; color: var(--text); margin: 24px 0 8px; }
+    .modal-body h3:first-child { margin-top: 0; }
+    .modal-body p { margin-bottom: 12px; }
+
     /* FAQ */
     .faq-wrap { max-width: 760px; margin: 0 auto; padding: 100px 24px; }
     .faq-list { margin-top: 56px; display: flex; flex-direction: column; gap: 2px; border-radius: 20px; overflow: hidden; background: var(--border); }
@@ -490,9 +520,53 @@
     </a>
     <div class="footer-links">
       <a href="mailto:infoathletizer@gmail.com">Contact</a>
+      <a href="#" id="terms-link">Terms & Conditions</a>
     </div>
     <div class="footer-copy">© 2026 Athletizer. All rights reserved.</div>
   </footer>
+
+  <!-- TERMS MODAL -->
+  <div class="modal-overlay" id="terms-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Terms & Conditions</h2>
+        <button class="modal-close" id="terms-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h3>1. Acceptance of Terms</h3>
+        <p>By accessing or using Athletizer, you agree to be bound by these Terms & Conditions. If you do not agree, please do not use the platform.</p>
+
+        <h3>2. Platform Use</h3>
+        <p>Athletizer is a platform for discovering and joining casual pickup sports games. You agree to use the platform only for lawful purposes and in a way that does not infringe on the rights of others.</p>
+
+        <h3>3. Eligibility</h3>
+        <p>You must be at least 18 years old to create an account. By using Athletizer, you confirm that you meet this requirement.</p>
+
+        <h3>4. User Conduct</h3>
+        <p>You are responsible for your behavior at any game booked through Athletizer. Athletizer expects all participants to treat others with respect. Disruptive, dangerous, or abusive behavior may result in removal from the platform.</p>
+
+        <h3>5. Payments & Refunds</h3>
+        <p>Payments are processed securely through the app. If a game is cancelled or does not reach the minimum number of players, you will receive a full refund automatically. Refunds for voluntary cancellations are subject to the cancellation policy set by the game organizer.</p>
+
+        <h3>6. Assumption of Risk</h3>
+        <p>Participation in physical sports activities carries inherent risks. By booking and attending a game through Athletizer, you acknowledge and accept these risks. Athletizer is not liable for any injury, loss, or damage arising from participation.</p>
+
+        <h3>7. Limitation of Liability</h3>
+        <p>Athletizer is not responsible for the actions of individual users or game organizers. We do not guarantee the quality, safety, or accuracy of any game listing. Your use of the platform is at your own risk.</p>
+
+        <h3>8. Privacy</h3>
+        <p>We collect and use your data in accordance with our Privacy Policy. By using Athletizer, you consent to this data use.</p>
+
+        <h3>9. Changes to Terms</h3>
+        <p>We may update these Terms at any time. Continued use of Athletizer after changes are posted constitutes acceptance of the revised Terms.</p>
+
+        <h3>10. Contact</h3>
+        <p>Questions about these Terms? Reach us at <a href="mailto:infoathletizer@gmail.com" style="color: var(--green-light);">infoathletizer@gmail.com</a>.</p>
+
+        <p style="margin-top: 24px; font-size: 12px;">Last updated: March 2026</p>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Fade in on scroll
@@ -542,6 +616,12 @@
       successEl.classList.add('show');
       document.querySelector('.waitlist-note') && (document.querySelector('.waitlist-note').style.display = 'none');
     }
+
+    // Terms modal
+    const termsModal = document.getElementById('terms-modal');
+    document.getElementById('terms-link').addEventListener('click', (e) => { e.preventDefault(); termsModal.classList.add('open'); });
+    document.getElementById('terms-close').addEventListener('click', () => termsModal.classList.remove('open'));
+    termsModal.addEventListener('click', (e) => { if (e.target === termsModal) termsModal.classList.remove('open'); });
 
     // FAQ accordion
     document.querySelectorAll('.faq-question').forEach(btn => {
