@@ -315,6 +315,17 @@
       .waitlist-form { flex-direction: column; }
     }
 
+    /* PROMO BADGE */
+    .promo-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, rgba(22,163,74,0.18), rgba(74,222,128,0.08));
+      border: 1px solid rgba(22,163,74,0.45);
+      color: var(--text); font-size: 14px; font-weight: 700;
+      padding: 12px 22px; border-radius: 14px; margin-top: 32px; position: relative;
+    }
+    .promo-badge strong { color: var(--green-light); }
+    .promo-badge .promo-icon { font-size: 20px; }
+
     /* FADE IN */
     .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -328,7 +339,7 @@
       <img src="logo.png" alt="Athletizer" />
       <span class="nav-logo-text"><span>A</span>thletizer</span>
     </a>
-    <a href="#waitlist" class="nav-cta">Get Early Access</a>
+    <a href="#waitlist" class="nav-cta">Get First Game Free</a>
   </nav>
 
   <!-- HERO -->
@@ -339,14 +350,18 @@
     <h1>Find Your Game.<br /><em>Play Tonight.</em></h1>
     <p class="hero-sub">Athletizer connects players with local pickup soccer games in their city. No teams, no commitments — find a game, book your spot, show up and play.</p>
 
+    <div class="promo-badge">
+      <span class="promo-icon">🎁</span> Early access perk — <strong>your first game is FREE</strong> when we launch
+    </div>
+
     <form class="waitlist-form" id="hero-form">
       <input class="waitlist-input" type="email" placeholder="Enter your email" required />
-      <button class="waitlist-btn" type="submit">Notify Me →</button>
+      <button class="waitlist-btn" type="submit">Get My Free Game →</button>
     </form>
     <div class="waitlist-success" id="hero-success">
-      <span>✅</span> You're on the list! We'll let you know when we launch.
+      <span>✅</span> You're on the list! Your first game is <strong>FREE</strong> when Athletizer launches.
     </div>
-    <p class="waitlist-note">Be the first to know when Athletizer drops. No spam, ever.</p>
+    <p class="waitlist-note">Sign up now and your first game is on us. No spam, ever.</p>
 
     <div class="store-badges">
       <a href="#" class="store-badge">
@@ -499,16 +514,16 @@
   <!-- FINAL CTA / WAITLIST -->
   <div class="cta-wrap" id="waitlist">
     <div class="cta-glow"></div>
-    <h2 class="fade-up">Be the first to play.</h2>
-    <p class="fade-up">Drop your email and we'll notify you the moment Athletizer is live in your city.</p>
+    <h2 class="fade-up">Your first game is on us.</h2>
+    <p class="fade-up">Sign up for early access — when we launch, your first game is <strong style="color: var(--green-light);">FREE</strong>. No commitments.</p>
     <div class="cta-form fade-up">
       <form class="waitlist-form" id="cta-form" style="margin-top:0">
         <input class="waitlist-input" type="email" placeholder="Enter your email" required />
-        <button class="waitlist-btn" type="submit">Join the Waitlist →</button>
+        <button class="waitlist-btn" type="submit">Get My Free Game →</button>
       </form>
     </div>
     <div class="waitlist-success" id="cta-success" style="justify-content:center; margin-top:24px;">
-      <span>✅</span> You're on the list! We'll be in touch soon.
+      <span>✅</span> You're on the list! Your first game is <strong>FREE</strong> when Athletizer launches.
     </div>
   </div>
 
