@@ -645,29 +645,24 @@
     });
 
     // Waitlist form submission
-    const SUPABASE_URL = 'https://cuhhcwqquvspyinhxgzk.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1aGhjd3FxdXZzcHlpbmh4Z3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwMzI0NzMsImV4cCI6MjA4OTYwODQ3M30.sTyavLJtmyOiFNIHM-cqk08MOXlsf3W_3pnm7P5sx98';
+    const EDGE_FN_URL = 'https://cuhhcwqquvspyinhxgzk.supabase.co/functions/v1/waitlist-signup';
 
     async function submitWaitlist(form, successEl) {
       const email = form.querySelector('input[type="email"]').value;
       const btn = form.querySelector('button');
+      const originalText = btn.textContent;
       btn.disabled = true;
       btn.textContent = 'Sending...';
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+        const res = await fetch(EDGE_FN_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'Prefer': 'return=minimal',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email }),
         });
-        if (!res.ok && res.status !== 409) throw new Error();
+        if (!res.ok) throw new Error();
       } catch (e) {
         btn.disabled = false;
-        btn.textContent = 'Notify Me →';
+        btn.textContent = originalText;
         alert('Something went wrong. Please try again.');
         return;
       }
