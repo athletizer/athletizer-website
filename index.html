@@ -538,7 +538,7 @@
     </a>
     <div class="footer-links">
       <a href="mailto:infoathletizer@gmail.com">Contact</a>
-      <a href="#" id="terms-link">Terms & Conditions</a>
+      <a href="/terms">Terms & Conditions</a>
       <a href="/privacy">Privacy Policy</a>
     </div>
     <div class="footer-copy">© 2026 Athletizer. All rights reserved.</div>
@@ -683,7 +683,6 @@
 
     // Terms modal
     const termsModal = document.getElementById('terms-modal');
-    document.getElementById('terms-link').addEventListener('click', (e) => { e.preventDefault(); termsModal.classList.add('open'); });
     document.getElementById('terms-close').addEventListener('click', () => termsModal.classList.remove('open'));
     termsModal.addEventListener('click', (e) => { if (e.target === termsModal) termsModal.classList.remove('open'); });
 
