@@ -135,6 +135,7 @@
     }
     .waitlist-success.show { display: flex; }
     .waitlist-note { font-size: 12px; color: var(--muted); margin-top: 12px; position: relative; }
+    .waitlist-error { font-size: 13px; color: #F87171; margin-top: 10px; min-height: 18px; }
 
     /* VALUE PROPS STRIP */
     .props-strip {
@@ -318,6 +319,7 @@
       <input class="waitlist-input" type="email" placeholder="Enter your email" required />
       <button class="waitlist-btn" type="submit">Notify Me →</button>
     </form>
+    <p class="waitlist-error" id="hero-error"></p>
     <div class="waitlist-success" id="hero-success">
       <span>✅</span> You're on the list! We'll let you know when we launch.
     </div>
@@ -484,6 +486,7 @@
         <input class="waitlist-input" type="email" placeholder="Enter your email" required />
         <button class="waitlist-btn" type="submit">Join the Waitlist →</button>
       </form>
+      <p class="waitlist-error" id="cta-error"></p>
     </div>
     <div class="waitlist-success" id="cta-success" style="justify-content:center; margin-top:24px;">
       <span>✅</span> You're on the list! We'll be in touch soon.
@@ -498,6 +501,7 @@
     </a>
     <div class="footer-links">
       <a href="mailto:infoathletizer@gmail.com">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
     </div>
     <div class="footer-copy">© 2026 Athletizer. All rights reserved.</div>
   </footer>
@@ -523,11 +527,12 @@
     const SUPABASE_URL = 'https://cuhhcwqquvspyinhxgzk.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1aGhjd3FxdXZzcHlpbmh4Z3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwMzI0NzMsImV4cCI6MjA4OTYwODQ3M30.sTyavLJtmyOiFNIHM-cqk08MOXlsf3W_3pnm7P5sx98';
 
-    async function submitWaitlist(form, successEl) {
+    async function submitWaitlist(form, successEl, errorEl) {
       const email = form.querySelector('input[type="email"]').value;
       const btn = form.querySelector('button');
       btn.disabled = true;
       btn.textContent = 'Sending...';
+      errorEl.textContent = '';
       try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
           method: 'POST',
@@ -543,22 +548,23 @@
       } catch (e) {
         btn.disabled = false;
         btn.textContent = 'Notify Me →';
-        alert('Something went wrong. Please try again.');
+        errorEl.textContent = 'Something went wrong. Please try again.';
         return;
       }
       form.style.display = 'none';
+      errorEl.style.display = 'none';
       successEl.classList.add('show');
       document.querySelector('.waitlist-note') && (document.querySelector('.waitlist-note').style.display = 'none');
     }
 
     document.getElementById('hero-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      await submitWaitlist(document.getElementById('hero-form'), document.getElementById('hero-success'));
+      await submitWaitlist(document.getElementById('hero-form'), document.getElementById('hero-success'), document.getElementById('hero-error'));
     });
 
     document.getElementById('cta-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      await submitWaitlist(document.getElementById('cta-form'), document.getElementById('cta-success'));
+      await submitWaitlist(document.getElementById('cta-form'), document.getElementById('cta-success'), document.getElementById('cta-error'));
     });
   </script>
 </body>

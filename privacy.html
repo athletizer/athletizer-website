@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Athletizer</title>
+  <meta name="description" content="Athletizer Privacy Policy — how we collect, use, and protect your data." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #16A34A;
+      --green-light: #22C55E;
+      --dark: #080C14;
+      --dark2: #0D1421;
+      --card: #131C2E;
+      --border: rgba(255,255,255,0.07);
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --font: 'Inter', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--dark); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(8, 12, 20, 0.92); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 36px; width: auto; filter: invert(1) brightness(2); }
+    .nav-logo-text { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; color: var(--text); }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 120px 24px 80px;
+    }
+
+    .page-title {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+    .page-title span { color: var(--green-light); }
+    .last-updated { font-size: 14px; color: var(--muted); margin-bottom: 48px; }
+
+    .toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .toc h3 { font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+    .toc ol { padding-left: 18px; }
+    .toc ol li { margin-bottom: 6px; }
+    .toc ol li a { font-size: 14px; color: var(--green-light); text-decoration: none; }
+    .toc ol li a:hover { text-decoration: underline; }
+
+    .section { margin-bottom: 44px; }
+    h2 {
+      font-size: 18px; font-weight: 700; color: var(--text);
+      margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 { font-size: 15px; font-weight: 600; color: var(--text); margin: 20px 0 8px; }
+    p { font-size: 15px; line-height: 1.8; color: var(--muted); margin-bottom: 12px; }
+    ul, ol { padding-left: 0; margin-bottom: 12px; list-style: none; }
+    ul li, ol li {
+      font-size: 15px; line-height: 1.8; color: var(--muted);
+      padding: 3px 0 3px 20px; position: relative;
+    }
+    ul li::before { content: '–'; position: absolute; left: 0; color: var(--green-light); }
+    ol { counter-reset: list-counter; }
+    ol li { counter-increment: list-counter; }
+    ol li::before { content: counter(list-counter) "."; position: absolute; left: 0; color: var(--green-light); font-weight: 600; font-size: 13px; }
+    a { color: var(--green-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    strong.label { color: var(--text); }
+
+    .highlight-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 16px 0;
+    }
+    .highlight-box p { margin: 0; font-size: 14px; }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+    .contact-card p { margin: 0; line-height: 2; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    footer p { font-size: 13px; color: var(--muted); margin: 0; }
+    footer a { color: var(--muted); font-size: 13px; }
+    footer a:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .container { padding: 100px 20px 60px; }
+      .page-title { font-size: 28px; }
+      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="logo.png" alt="Athletizer" />
+      <span class="nav-logo-text">Athletizer</span>
+    </a>
+  </nav>
+
+  <div class="container">
+    <h1 class="page-title">Privacy <span>Policy</span></h1>
+    <p class="last-updated">Last updated: March 27, 2026</p>
+
+    <div class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#definitions">Definitions</a></li>
+        <li><a href="#data-we-collect">Information We Collect</a></li>
+        <li><a href="#how-we-use">How We Use Your Information</a></li>
+        <li><a href="#sharing">How We Share Your Information</a></li>
+        <li><a href="#storage-security">Data Storage & Security</a></li>
+        <li><a href="#retention">Data Retention</a></li>
+        <li><a href="#transfers">International Data Transfers</a></li>
+        <li><a href="#cookies">Cookies & Tracking</a></li>
+        <li><a href="#communications">Communications & Opt-Out</a></li>
+        <li><a href="#your-rights">Your Rights</a></li>
+        <li><a href="#children">Children's Privacy</a></li>
+        <li><a href="#third-party-links">Third-Party Links</a></li>
+        <li><a href="#business-transfers">Business Transfers</a></li>
+        <li><a href="#automated">Automated Decision-Making</a></li>
+        <li><a href="#account-security">Account Security</a></li>
+        <li><a href="#changes">Changes to This Policy</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ol>
+    </div>
+
+    <p>Athletizer ("we", "us", or "our") operates the Athletizer mobile application and website at <a href="https://athletizer.com">athletizer.com</a>. This Privacy Policy explains how we collect, use, share, and protect your personal information when you use our services.</p>
+    <p>By registering for or using Athletizer, you acknowledge that you have read and agree to this Privacy Policy. We comply with the Albanian Law No. 9887 "On Protection of Personal Data" and, where applicable, the EU General Data Protection Regulation (GDPR).</p>
+
+    <!-- 1 -->
+    <div class="section" id="definitions">
+      <h2>1. Definitions</h2>
+      <ul>
+        <li><strong class="label">Account</strong> — A unique account created for you to access our Service.</li>
+        <li><strong class="label">App</strong> — The Athletizer mobile application, available on iOS and Android.</li>
+        <li><strong class="label">Device</strong> — Any smartphone, tablet, or other hardware used to access our Service.</li>
+        <li><strong class="label">Personal Data</strong> — Any information that relates to an identified or identifiable individual.</li>
+        <li><strong class="label">Service</strong> — The Athletizer mobile app and website at athletizer.com.</li>
+        <li><strong class="label">Service Provider</strong> — Any third-party company that processes data on our behalf.</li>
+        <li><strong class="label">Usage Data</strong> — Data collected automatically when you use the Service (e.g., device type, IP address).</li>
+        <li><strong class="label">You / User</strong> — The individual accessing or using the Service.</li>
+      </ul>
+    </div>
+
+    <!-- 2 -->
+    <div class="section" id="data-we-collect">
+      <h2>2. Information We Collect</h2>
+
+      <h3>Information You Provide</h3>
+      <ul>
+        <li>Full name and email address when you create an account</li>
+        <li>Password (stored encrypted — we never see it in plain text)</li>
+        <li>Profile photo (optional)</li>
+        <li>Bio, playing position, country, and skill level (optional profile fields)</li>
+        <li>Messages sent to other users within the app</li>
+        <li>Information submitted via support or feedback requests</li>
+      </ul>
+
+      <h3>Usage Data (collected automatically)</h3>
+      <ul>
+        <li>Device type, model, and operating system version</li>
+        <li>IP address and approximate location derived from it</li>
+        <li>App screens visited and time spent</li>
+        <li>Crash logs and diagnostic data</li>
+        <li>Timestamps of interactions (bookings, messages, logins)</li>
+      </ul>
+
+      <h3>Location Data</h3>
+      <ul>
+        <li>Your real-time location (GPS), used to show pickup games near you</li>
+        <li>Location is accessed only while using the app and only with your permission</li>
+        <li>We do not store your precise GPS coordinates on our servers</li>
+        <li>You can disable location access at any time in your device settings, though some features will be unavailable</li>
+      </ul>
+
+      <h3>Payment Information</h3>
+      <ul>
+        <li>Game entry fee payments are processed by PayPal</li>
+        <li>We do not store your card or bank details — all payment data is handled directly by PayPal</li>
+        <li>We store a record of the transaction amount, PayPal order ID, and booking status</li>
+      </ul>
+
+      <h3>Push Notification Token</h3>
+      <ul>
+        <li>A device token used to deliver push notifications about your games, bookings, and messages</li>
+        <li>Collected only if you grant notification permission on your device</li>
+      </ul>
+    </div>
+
+    <!-- 3 -->
+    <div class="section" id="how-we-use">
+      <h2>3. How We Use Your Information</h2>
+      <ul>
+        <li>To create and manage your account <em>(contractual basis)</em></li>
+        <li>To show you pickup soccer games near your location <em>(contractual basis)</em></li>
+        <li>To process game bookings and payments <em>(contractual basis)</em></li>
+        <li>To send transactional emails — booking confirmations, cancellations, password resets <em>(contractual basis)</em></li>
+        <li>To send push notifications about your games, messages, and activity <em>(contractual basis)</em></li>
+        <li>To enable in-app messaging between players <em>(contractual basis)</em></li>
+        <li>To process refunds when a game is cancelled <em>(contractual basis)</em></li>
+        <li>To improve the app, fix bugs, and analyze usage trends <em>(legitimate interest)</em></li>
+        <li>To prevent fraud or unauthorized use of the Service <em>(legitimate interest)</em></li>
+        <li>To respond to your support or feedback requests <em>(legitimate interest)</em></li>
+        <li>To send updates about new features or games in your area, where you have opted in <em>(consent)</em></li>
+      </ul>
+    </div>
+
+    <!-- 4 -->
+    <div class="section" id="sharing">
+      <h2>4. How We Share Your Information</h2>
+      <div class="highlight-box">
+        <p>We do not sell, rent, or trade your personal data to any third party for marketing purposes.</p>
+      </div>
+
+      <h3>Service Providers</h3>
+      <p>We share data with trusted third-party providers that help us operate the Service. These providers are contractually prohibited from using your data for any purpose other than providing services to us:</p>
+      <ul>
+        <li><strong class="label">Supabase</strong> — database hosting and user authentication</li>
+        <li><strong class="label">PayPal</strong> — payment processing (<a href="https://www.paypal.com/webapps/mpp/ua/privacy-full" target="_blank">PayPal Privacy Policy</a>)</li>
+        <li><strong class="label">Resend</strong> — transactional email delivery</li>
+        <li><strong class="label">Expo</strong> — push notification infrastructure</li>
+      </ul>
+
+      <h3>Other Players</h3>
+      <p>When you join a game, your name, profile photo, and skill level are visible to other players in that game. Your email and payment details are never shared with other users.</p>
+
+      <h3>Legal Requirements</h3>
+      <p>We may disclose your information if required by law, court order, or government authority, or to protect the rights, safety, or property of Athletizer or our users.</p>
+
+      <h3>With Your Consent</h3>
+      <p>We will not share your data for any other purpose without notifying you and obtaining your explicit consent.</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="section" id="storage-security">
+      <h2>5. Data Storage & Security</h2>
+      <p>Your data is stored securely using <a href="https://supabase.com" target="_blank">Supabase</a>. All data is encrypted in transit using TLS (HTTPS) and encrypted at rest.</p>
+      <p>Access to your data is restricted through Row Level Security (RLS) policies — each user can only access their own data unless they have explicit permissions granted by the system.</p>
+      <p>We restrict internal access to personal data to authorized personnel only, and only where necessary to operate the Service.</p>
+      <p>While we implement industry-standard security measures, no method of electronic transmission or storage is 100% secure. We cannot guarantee absolute security, but we are committed to protecting your data to the best of our ability.</p>
+    </div>
+
+    <!-- 6 -->
+    <div class="section" id="retention">
+      <h2>6. Data Retention</h2>
+      <p>We retain your personal data for as long as your account is active and as needed to provide the Service. If you request account deletion, your personal data is removed from our systems within 30 days.</p>
+      <p>We may retain certain data longer where required by law, for fraud prevention, dispute resolution, or to enforce our agreements. Financial transaction records may be retained for up to 7 years for legal and accounting compliance.</p>
+    </div>
+
+    <!-- 7 -->
+    <div class="section" id="transfers">
+      <h2>7. International Data Transfers</h2>
+      <p>Athletizer is based in Albania. Your data may be processed and stored in servers located outside your country, including within the European Union and the United States, by our Service Providers (Supabase, PayPal, Resend, Expo).</p>
+      <p>By using the Service, you consent to the transfer of your data to these jurisdictions. We ensure that any such transfers are conducted with appropriate safeguards in place, consistent with applicable data protection laws.</p>
+    </div>
+
+    <!-- 8 -->
+    <div class="section" id="cookies">
+      <h2>8. Cookies & Tracking</h2>
+      <p>The Athletizer website (athletizer.com) uses minimal browser storage to support core functionality such as form submissions. We do not use advertising cookies or behavioral tracking on our website.</p>
+      <p>The Athletizer mobile app does not use cookies. Session management is handled securely through Supabase authentication tokens stored locally on your device.</p>
+      <p>You may clear local storage or app data at any time through your device or browser settings.</p>
+    </div>
+
+    <!-- 9 -->
+    <div class="section" id="communications">
+      <h2>9. Communications & Opt-Out</h2>
+
+      <h3>Transactional Emails</h3>
+      <p>We send emails related to your account and bookings — such as booking confirmations, game cancellations, and password resets. These are required to provide the Service and cannot be opted out of while you have an active account.</p>
+
+      <h3>Push Notifications</h3>
+      <p>We send push notifications about your games, messages, and activity. You can disable push notifications at any time in your device settings (Settings → Notifications → Athletizer).</p>
+
+      <h3>Marketing Communications</h3>
+      <p>If you opt in to marketing updates, we may send you information about new features or games in your area. You can opt out at any time by contacting us at <a href="mailto:infoathletizer@gmail.com">infoathletizer@gmail.com</a> or by using the unsubscribe link in any marketing email.</p>
+    </div>
+
+    <!-- 10 -->
+    <div class="section" id="your-rights">
+      <h2>10. Your Rights</h2>
+      <p>Under Albanian data protection law and, where applicable, GDPR, you have the following rights:</p>
+      <ul>
+        <li><strong class="label">Access</strong> — Request a copy of the personal data we hold about you</li>
+        <li><strong class="label">Rectification</strong> — Request correction of inaccurate or incomplete data</li>
+        <li><strong class="label">Erasure</strong> — Request deletion of your account and associated personal data</li>
+        <li><strong class="label">Restriction</strong> — Request that we limit how we process your data in certain circumstances</li>
+        <li><strong class="label">Portability</strong> — Request a copy of your data in a structured, machine-readable format</li>
+        <li><strong class="label">Objection</strong> — Object to processing based on our legitimate interests</li>
+        <li><strong class="label">Withdraw Consent</strong> — Withdraw consent for any processing based on consent at any time</li>
+        <li><strong class="label">Complaint</strong> — Lodge a complaint with the Albanian Information and Data Protection Commissioner (idp.al)</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at <a href="mailto:infoathletizer@gmail.com">infoathletizer@gmail.com</a>. We will respond within 30 days.</p>
+    </div>
+
+    <!-- 11 -->
+    <div class="section" id="children">
+      <h2>11. Children's Privacy</h2>
+      <p>Athletizer is not intended for users under the age of 13. We do not knowingly collect personal data from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us at <a href="mailto:infoathletizer@gmail.com">infoathletizer@gmail.com</a> and we will delete it promptly.</p>
+    </div>
+
+    <!-- 12 -->
+    <div class="section" id="third-party-links">
+      <h2>12. Third-Party Links</h2>
+      <p>The Service may contain links to third-party websites or services (such as PayPal). Athletizer is not responsible for the privacy practices or content of those third parties. We encourage you to review their privacy policies before providing any personal information.</p>
+    </div>
+
+    <!-- 13 -->
+    <div class="section" id="business-transfers">
+      <h2>13. Business Transfers</h2>
+      <p>In the event of a merger, acquisition, asset sale, or similar transaction, your personal data may be transferred as part of that transaction. We will notify you via email or a prominent notice within the app before your data becomes subject to a different privacy policy.</p>
+    </div>
+
+    <!-- 14 -->
+    <div class="section" id="automated">
+      <h2>14. Automated Decision-Making</h2>
+      <p>Athletizer does not use your personal data for automated decision-making or profiling that produces legal or similarly significant effects on you.</p>
+    </div>
+
+    <!-- 15 -->
+    <div class="section" id="account-security">
+      <h2>15. Account Security</h2>
+      <p>You are responsible for maintaining the confidentiality of your account credentials. Do not share your password with anyone. If you believe your account has been compromised, contact us immediately at <a href="mailto:infoathletizer@gmail.com">infoathletizer@gmail.com</a> so we can take appropriate action.</p>
+    </div>
+
+    <!-- 16 -->
+    <div class="section" id="changes">
+      <h2>16. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we make material changes, we will notify you via email or a prominent in-app notice at least 15 days before the changes take effect. The updated date at the top of this page will always reflect when the policy was last revised.</p>
+      <p>Continued use of the Service after changes take effect constitutes your acceptance of the revised policy.</p>
+    </div>
+
+    <!-- 17 -->
+    <div class="section" id="contact">
+      <h2>17. Contact Us</h2>
+      <p>If you have any questions, concerns, or requests regarding this Privacy Policy or how we handle your data, please contact us:</p>
+      <div class="contact-card">
+        <p>
+          <strong class="label">Athletizer</strong><br />
+          <a href="mailto:infoathletizer@gmail.com">infoathletizer@gmail.com</a><br />
+          Tirana, Albania
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Athletizer. All rights reserved.</p>
+    <a href="/">Back to home</a>
+  </footer>
+
+</body>
+</html>
