@@ -678,7 +678,6 @@
 
     // Privacy modal
     const privacyModal = document.getElementById('privacy-modal');
-    document.getElementById('privacy-link').addEventListener('click', (e) => { e.preventDefault(); privacyModal.classList.add('open'); });
     document.getElementById('privacy-close').addEventListener('click', () => privacyModal.classList.remove('open'));
     privacyModal.addEventListener('click', (e) => { if (e.target === privacyModal) privacyModal.classList.remove('open'); });
 
