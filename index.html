@@ -425,26 +425,47 @@
     .step h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--text); position: relative; }
     .step p { font-size: 14px; color: var(--muted); line-height: 1.7; position: relative; }
 
-    /* ════════ COMMUNITY (dark) ════════ */
+    /* ════════ COMMUNITY / TESTIMONIALS (dark) ════════ */
     .community-wrap { background: var(--dark2); padding: 96px 24px; }
     .community-inner { max-width: 1080px; margin: 0 auto; }
     .community-header { text-align: center; max-width: 700px; margin: 0 auto; }
-    .community-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; border-radius: 20px; overflow: hidden; }
-    .community-card {
-      background: rgba(255,255,255,0.04); padding: 44px 36px;
-      border: none; text-align: left;
+
+    /* Testimonial grid */
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      margin-top: 60px;
+    }
+    .testi-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 20px; padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 20px;
       opacity: 0; transform: translateY(24px);
-      transition: opacity 0.55s ease, transform 0.55s ease, background 0.2s;
+      transition: opacity 0.55s ease, transform 0.55s ease, background 0.2s, border-color 0.2s;
     }
-    .community-card.visible { opacity: 1; transform: translateY(0); }
-    .community-card:hover { background: rgba(255,255,255,0.07); }
-    .community-icon { font-size: 40px; margin-bottom: 20px; display: block; }
-    .community-card h3 { font-size: 18px; font-weight: 800; color: white; margin-bottom: 10px; letter-spacing: -0.3px; }
-    .community-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; }
-    .community-num {
-      font-family: var(--display); font-size: 13px; letter-spacing: 1.5px;
-      color: var(--green-bright); margin-bottom: 8px; display: block;
+    .testi-card.visible { opacity: 1; transform: translateY(0); }
+    .testi-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(34,197,94,0.3); }
+    .testi-stars { color: var(--green-bright); font-size: 14px; letter-spacing: 2px; }
+    .testi-quote {
+      font-size: 15px; color: rgba(255,255,255,0.82); line-height: 1.75;
+      font-style: italic; flex: 1;
+      position: relative;
     }
+    .testi-quote::before {
+      content: '\201C';
+      font-family: var(--display); font-size: 64px;
+      color: var(--green-bright); opacity: 0.35;
+      position: absolute; top: -18px; left: -6px;
+      line-height: 1; pointer-events: none;
+    }
+    .testi-author { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800; color: white; flex-shrink: 0;
+    }
+    .testi-name { font-size: 14px; font-weight: 700; color: white; }
+    .testi-loc { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
 
     /* ════════ FEATURES ════════ */
     .features-wrap { background: var(--bg); padding: 96px 24px; }
@@ -574,7 +595,7 @@
       nav, nav.scrolled { padding: 14px 20px; }
       .hero h1 { font-size: clamp(64px, 18vw, 100px); }
       .steps { grid-template-columns: 1fr; }
-      .community-grid { grid-template-columns: 1fr; gap: 1px; }
+      .testi-grid { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
       .stats-inner { grid-template-columns: 1fr; }
       .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
@@ -824,24 +845,39 @@
         <h2 class="section-title light">Football is better when you know the people</h2>
         <p class="section-sub light" style="max-width:520px; margin: 16px auto 0;">Athletizer isn't just a booking app — it's how Dublin's football community finds each other.</p>
       </div>
-      <div class="community-grid" id="community-row">
-        <div class="community-card">
-          <span class="community-num">01</span>
-          <span class="community-icon">👋</span>
-          <h3>Meet Players Like You</h3>
-          <p>Every game is full of Dubliners who just want a good run. Make connections, build regulars, stop showing up alone.</p>
+      <div class="testi-grid" id="community-row">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">Found a 6-a-side in Drimnagh on a Tuesday night. Showed up not knowing anyone — by full time I had three lads' numbers and we were talking about the next one.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#16A34A,#15803D);">CK</div>
+            <div>
+              <div class="testi-name">Ciarán K.</div>
+              <div class="testi-loc">📍 Drimnagh</div>
+            </div>
+          </div>
         </div>
-        <div class="community-card">
-          <span class="community-num">02</span>
-          <span class="community-icon">📍</span>
-          <h3>Across All of Dublin</h3>
-          <p>Drimnagh, Sandymount, Clontarf, Rathmines, Terenure, Crumlin and more. Find something near you, whenever you're free.</p>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">I moved to Dublin eight months ago and knew nobody. Athletizer is literally how I made friends here. Four games in and I've got a whole crew now.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0ea5e9,#0369a1);">AS</div>
+            <div>
+              <div class="testi-name">Adam S.</div>
+              <div class="testi-loc">📍 Rathmines</div>
+            </div>
+          </div>
         </div>
-        <div class="community-card">
-          <span class="community-num">03</span>
-          <span class="community-icon">💬</span>
-          <h3>Chat Before Kickoff</h3>
-          <p>Every game has its own chat. Sort lifts, decide bibs or skins, share the meeting spot, break the ice.</p>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">The refund thing sold me. Every other pickup I've done, someone disappears with the money. Here it's all in the app, dead simple, and the game actually happens.</p>
+          <div class="testi-author">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#b45309);">RO</div>
+            <div>
+              <div class="testi-name">Rachel O'B.</div>
+              <div class="testi-loc">📍 Clontarf</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1035,7 +1071,7 @@
     const cardObs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.step, .community-card, .feature').forEach((c, i) => {
+          entry.target.querySelectorAll('.step, .testi-card, .feature').forEach((c, i) => {
             setTimeout(() => c.classList.add('visible'), i * 140);
           });
           cardObs.unobserve(entry.target);
