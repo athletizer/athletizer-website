@@ -8,498 +8,471 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --green: #16A34A;
-      --green-hover: #15803D;
-      --green-light: #22C55E;
+      --green-bright: #22C55E;
       --green-pale: #F0FDF4;
       --green-mid: #DCFCE7;
       --green-border: #BBF7D0;
       --white: #FFFFFF;
-      --bg: #F7FAF7;
-      --dark: #052e16;
-      --text: #1A2E1A;
+      --bg: #F8FAF8;
+      --dark: #030f06;
+      --dark2: #052e16;
+      --text: #111813;
       --muted: #52716B;
       --border: #E2F0E8;
-      --shadow: rgba(22, 163, 74, 0.09);
+      --shadow: rgba(22,163,74,0.10);
       --font: 'Inter', sans-serif;
+      --display: 'Bebas Neue', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-    /* ════════════════════════════════
-       KEYFRAME ANIMATIONS
-    ════════════════════════════════ */
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(36px); }
+    /* ════════ KEYFRAMES ════════ */
+    @keyframes lineReveal {
+      from { transform: translateY(105%); }
+      to   { transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(-6px); }
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.4; transform: scale(1.5); }
-    }
-    @keyframes heroBg {
-      0%, 100% { opacity: 1; transform: scale(1) translateY(0); }
-      50%       { opacity: 0.65; transform: scale(1.06) translateY(-10px); }
-    }
-    @keyframes kenBurns {
-      from { transform: scale(1) translateX(0); }
-      to   { transform: scale(1.1) translateX(-1%); }
-    }
-    @keyframes tickUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes tickDown {
-      from { opacity: 1; transform: translateY(0); }
-      to   { opacity: 0; transform: translateY(-12px); }
-    }
-    @keyframes glowPulse {
-      0%, 100% { opacity: 0.5; }
-      50%       { opacity: 1; }
-    }
-    @keyframes shimmer {
-      0%   { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-    @keyframes bounceArrow {
-      0%, 100% { transform: translateY(0) translateX(-50%); }
-      50%       { transform: translateY(6px) translateX(-50%); }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes float  { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes pulse  { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(1.6); } }
+    @keyframes kenBurns { from { transform: scale(1); } to { transform: scale(1.09) translateX(-1%); } }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes glowPulse { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
+    @keyframes bounceY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+    @keyframes drawIn { to { stroke-dashoffset: 0; } }
+    @keyframes tickerLocationOut { to { opacity:0; transform: translateY(-12px); } }
+    @keyframes tickerLocationIn  { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: translateY(0); } }
 
-    /* ════════════════════════════════
-       NAV
-    ════════════════════════════════ */
+    /* ════════ NAV ════════ */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 48px;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: padding 0.3s, border-color 0.3s, box-shadow 0.3s;
+      padding: 20px 52px;
+      background: transparent;
+      transition: padding 0.35s, background 0.35s, box-shadow 0.35s;
     }
     nav.scrolled {
-      border-color: var(--border);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 var(--border), 0 4px 24px rgba(0,0,0,0.06);
+      padding: 12px 52px;
     }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo img { height: 34px; width: auto; }
-    .nav-logo-text { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; color: var(--text); }
-    .nav-logo-text span { color: var(--green); }
+    .nav-logo img {
+      height: 34px; width: auto;
+      filter: brightness(0) invert(1);
+      transition: filter 0.35s;
+    }
+    nav.scrolled .nav-logo img { filter: none; }
+    .nav-logo-text {
+      font-size: 20px; font-weight: 900; letter-spacing: -0.5px;
+      color: white; transition: color 0.35s;
+    }
+    nav.scrolled .nav-logo-text { color: var(--text); }
+    .nav-logo-text span { color: var(--green-bright); }
+    nav.scrolled .nav-logo-text span { color: var(--green); }
     .nav-cta {
-      background: var(--green); color: white; border: none;
-      padding: 10px 22px; border-radius: 100px; font-size: 14px; font-weight: 700;
+      background: var(--green-bright); color: var(--dark2); border: none;
+      padding: 10px 24px; border-radius: 100px; font-size: 14px; font-weight: 800;
       cursor: pointer; text-decoration: none;
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 2px 12px rgba(22,163,74,0.3);
+      box-shadow: 0 2px 16px rgba(34,197,94,0.45);
     }
-    .nav-cta:hover {
-      background: var(--green-hover);
-      transform: scale(1.04);
-      box-shadow: 0 4px 20px rgba(22,163,74,0.4);
-    }
+    nav.scrolled .nav-cta { background: var(--green); color: white; box-shadow: 0 2px 12px rgba(22,163,74,0.3); }
+    .nav-cta:hover { transform: scale(1.05); box-shadow: 0 4px 24px rgba(34,197,94,0.5); }
 
-    /* ════════════════════════════════
-       HERO
-    ════════════════════════════════ */
+    /* ════════ HERO ════════ */
     .hero {
-      min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; text-align: center;
-      padding: 120px 24px 0; position: relative; overflow: hidden;
-      background: var(--white);
+      position: relative; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+      padding: 120px 24px 80px;
     }
-    /* Animated breathing gradient */
-    .hero::before {
-      content: '';
+    .hero-bg {
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 90% 60% at 50% -5%, #dcfce7 0%, transparent 65%);
-      animation: heroBg 9s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    /* Hero badge — floats */
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--green-mid); border: 1.5px solid var(--green-border);
-      color: #15803D; font-size: 13px; font-weight: 700;
-      padding: 7px 18px; border-radius: 100px; margin-bottom: 32px; position: relative;
-      animation: slideUp 0.7s ease 0.1s both, float 5s ease-in-out 1s infinite;
-    }
-
-    /* Headline — lines stagger in */
-    .hero h1 {
-      font-size: clamp(40px, 7.5vw, 84px); font-weight: 900;
-      line-height: 1.04; letter-spacing: -2.5px; position: relative;
-    }
-    .hero-line {
-      display: block;
-      opacity: 0;
-      animation: slideUp 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    .hero-line:nth-child(1) { animation-delay: 0.25s; }
-    .hero-line:nth-child(2) { animation-delay: 0.42s; }
-    .hero-line:nth-child(3) { animation-delay: 0.58s; }
-    .hero-line em { font-style: normal; color: var(--green); }
-
-    .hero-sub {
-      font-size: clamp(16px, 2.2vw, 19px); color: var(--muted);
-      max-width: 500px; line-height: 1.7; margin-top: 22px; position: relative;
-      opacity: 0; animation: slideUp 0.7s ease 0.75s both;
-    }
-
-    /* Dublin location ticker */
-    .hero-ticker {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 20px; position: relative;
-      font-size: 14px; font-weight: 600; color: var(--muted);
-      opacity: 0; animation: fadeIn 0.6s ease 1s both;
-    }
-    .ticker-label { color: var(--muted); }
-    .ticker-location {
-      color: var(--green); font-weight: 800;
-      display: inline-block;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    /* Player avatars */
-    .hero-social {
-      display: flex; align-items: center; gap: 12px;
-      margin-top: 32px; position: relative;
-      opacity: 0; animation: slideUp 0.7s ease 1.1s both;
-    }
-    .avatar-stack { display: flex; }
-    .avatar-stack .av {
-      width: 38px; height: 38px; border-radius: 50%;
-      border: 2.5px solid var(--white);
-      background: var(--green-mid);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 17px; margin-left: -10px; overflow: hidden; flex-shrink: 0;
-    }
-    .avatar-stack .av:first-child { margin-left: 0; }
-    .social-text { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.4; }
-    .social-text span { color: var(--muted); font-weight: 500; font-size: 13px; display: block; }
-
-    /* Promo badge */
-    .promo-badge {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: #FFF7ED; border: 1.5px solid #FED7AA;
-      color: #92400E; font-size: 14px; font-weight: 600;
-      padding: 10px 20px; border-radius: 14px; margin-top: 28px; position: relative;
-      opacity: 0; animation: slideUp 0.6s ease 1.25s both;
-    }
-    .promo-badge strong { color: #C2410C; }
-
-    /* Waitlist form */
-    .waitlist-form {
-      display: flex; gap: 8px; margin-top: 32px;
-      flex-wrap: wrap; justify-content: center; position: relative;
-      width: 100%; max-width: 460px;
-      opacity: 0; animation: slideUp 0.6s ease 1.4s both;
-    }
-    .waitlist-form.no-anim { opacity: 1; animation: none; margin-top: 0; }
-    .waitlist-input {
-      flex: 1; min-width: 200px; padding: 14px 18px;
-      background: var(--bg); border: 1.5px solid var(--border);
-      border-radius: 14px; color: var(--text); font-size: 15px; font-family: var(--font);
-      outline: none; transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-    }
-    .waitlist-input::placeholder { color: var(--muted); }
-    .waitlist-input:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(22,163,74,0.12);
-      background: var(--white);
-    }
-    .waitlist-btn {
-      padding: 14px 24px; background: var(--green); color: white; border: none;
-      border-radius: 14px; font-size: 15px; font-weight: 700; cursor: pointer;
-      font-family: var(--font); transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      white-space: nowrap; box-shadow: 0 2px 12px rgba(22,163,74,0.35);
-    }
-    .waitlist-btn:hover {
-      background: var(--green-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(22,163,74,0.4);
-    }
-    .waitlist-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
-    .waitlist-success {
-      display: none; align-items: center; gap: 8px;
-      color: var(--green); font-size: 15px; font-weight: 600; margin-top: 36px;
-    }
-    .waitlist-success.show { display: flex; animation: slideUp 0.4s ease both; }
-    .waitlist-note {
-      font-size: 12px; color: var(--muted); margin-top: 10px; position: relative;
-      opacity: 0; animation: fadeIn 0.6s ease 1.7s both;
-    }
-    .waitlist-error { font-size: 13px; color: #DC2626; margin-top: 10px; min-height: 18px; }
-
-    /* App store badges */
-    .store-badges {
-      display: flex; gap: 10px; margin-top: 20px;
-      justify-content: center; flex-wrap: wrap; position: relative;
-      opacity: 0; animation: fadeIn 0.6s ease 1.8s both;
-    }
-    .store-badge {
-      display: flex; align-items: center; gap: 10px;
-      background: var(--white); border: 1.5px solid var(--border);
-      border-radius: 12px; padding: 10px 18px; text-decoration: none; color: var(--text);
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .store-badge:hover { border-color: var(--green-border); transform: translateY(-2px); box-shadow: 0 6px 20px var(--shadow); }
-    .store-badge-icon { width: 22px; height: 22px; flex-shrink: 0; }
-    .store-badge-text { display: flex; flex-direction: column; }
-    .store-badge-sub { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-    .store-badge-name { font-size: 14px; font-weight: 700; letter-spacing: -0.3px; }
-
-    /* Scroll indicator */
-    .scroll-hint {
-      position: relative; margin-top: 48px; margin-bottom: 0;
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
-      text-transform: uppercase;
-      opacity: 0; animation: fadeIn 0.6s ease 2.2s both;
-    }
-    .scroll-hint-arrow {
-      position: absolute; bottom: -24px; left: 50%;
-      font-size: 18px; color: var(--green-border);
-      animation: bounceArrow 1.8s ease-in-out infinite;
-    }
-
-    /* Hero field — parallax container */
-    .hero-field {
-      width: 100%; max-width: 1120px;
-      margin: 70px auto 0;
-      position: relative;
-      overflow: hidden;
-      border-radius: 28px 28px 0 0;
-    }
-    .hero-field img {
-      width: 100%; height: 480px; object-fit: cover;
-      display: block; border-radius: 28px 28px 0 0;
+      width: 100%; height: 100%; object-fit: cover;
+      animation: kenBurns 22s ease-in-out infinite alternate;
       will-change: transform;
     }
-    /* Floating info badges on the photo */
-    .field-badge {
-      position: absolute; display: flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,0.96); backdrop-filter: blur(10px);
-      border-radius: 100px; padding: 10px 18px;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.14);
-      font-size: 13px; font-weight: 700; color: var(--text);
-      animation: float 5s ease-in-out infinite;
-    }
-    .field-badge-1 { top: 28px; left: 32px; animation-delay: 0s; }
-    .field-badge-2 { top: 28px; right: 32px; animation-delay: 1.5s; }
-    .field-badge-3 {
-      bottom: 30px; left: 50%; transform: translateX(-50%);
-      animation: bounceArrow 2.5s ease-in-out infinite;
-      white-space: nowrap; font-size: 12px;
-    }
-    .field-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; animation: pulse 2s infinite; }
-
-    /* ════════════════════════════════
-       STATS STRIP
-    ════════════════════════════════ */
-    .stats-strip { background: var(--green); padding: 44px 24px; position: relative; overflow: hidden; }
-    .stats-strip::before {
-      content: '';
+    .hero-overlay {
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 50% 100% at 50% 50%, rgba(255,255,255,0.07), transparent);
-      pointer-events: none;
+      background: linear-gradient(
+        170deg,
+        rgba(3,15,6,0.72) 0%,
+        rgba(5,46,22,0.80) 50%,
+        rgba(3,15,6,0.94) 100%
+      );
+    }
+    /* Animated SVG pitch markings */
+    .pitch-svg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; opacity: 0.13;
+    }
+    .pitch-line {
+      stroke: white; stroke-width: 1.5; fill: none;
+      pathLength: 1;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: drawIn 2.2s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+    .pitch-line:nth-child(1) { animation-delay: 0.1s; }
+    .pitch-line:nth-child(2) { animation-delay: 0.5s; }
+    .pitch-line:nth-child(3) { animation-delay: 0.8s; }
+    .pitch-line:nth-child(4) { animation-delay: 1.0s; }
+    .pitch-line:nth-child(5) { animation-delay: 1.15s; }
+    .pitch-line:nth-child(6) { animation-delay: 1.3s; }
+    .pitch-line:nth-child(7) { animation-delay: 1.45s; }
+    .pitch-line:nth-child(8) { animation-delay: 1.6s; }
+    .pitch-line:nth-child(9) { animation-delay: 1.7s; }
+    .pitch-line:nth-child(10) { animation-delay: 1.8s; }
+    .pitch-dot { fill: white; opacity: 0; animation: fadeIn 0.4s ease 2.1s forwards; }
+
+    /* Hero content */
+    .hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1.5px solid rgba(34,197,94,0.45);
+      background: rgba(34,197,94,0.1);
+      backdrop-filter: blur(8px);
+      color: #86efac; font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 6px 18px; border-radius: 100px;
+      margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.7s ease 0.2s both;
+    }
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: #86efac; animation: pulse 2s infinite; }
+
+    /* Display headline */
+    .hero h1 {
+      font-family: var(--display);
+      font-size: clamp(76px, 14vw, 172px);
+      line-height: 0.88;
+      letter-spacing: 3px;
+      color: white;
+      margin-bottom: 0;
+    }
+    .reveal-wrap { overflow: hidden; display: block; }
+    .reveal-wrap span {
+      display: block;
+      animation: lineReveal 1s cubic-bezier(0.16,1,0.3,1) forwards;
+      opacity: 0;
+    }
+    .hero-line-1 span { animation-delay: 0.35s; }
+    .hero-line-2 span { animation-delay: 0.52s; }
+    .hero-line-3 span { animation-delay: 0.68s; color: var(--green-bright); }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,0.65);
+      max-width: 460px; line-height: 1.7; margin-top: 28px;
+      opacity: 0; animation: fadeUp 0.7s ease 1.0s both;
+    }
+
+    /* Dublin ticker */
+    .hero-ticker {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 22px; font-size: 14px; font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      opacity: 0; animation: fadeUp 0.6s ease 1.15s both;
+    }
+    .ticker-loc {
+      color: var(--green-bright); font-weight: 800;
+      display: inline-block;
+      transition: opacity 0.22s, transform 0.22s;
+    }
+
+    /* Waitlist form */
+    .hero-form-wrap {
+      margin-top: 36px; display: flex; flex-direction: column; align-items: center;
+      opacity: 0; animation: fadeUp 0.6s ease 1.3s both;
+    }
+    .promo-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,247,237,0.1); border: 1px solid rgba(251,191,36,0.4);
+      color: #FCD34D; font-size: 13px; font-weight: 600;
+      padding: 7px 16px; border-radius: 100px; margin-bottom: 16px;
+    }
+    .waitlist-form {
+      display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+      width: 100%; max-width: 460px;
+    }
+    .waitlist-form.no-anim { width: 100%; max-width: 460px; }
+    .waitlist-input {
+      flex: 1; min-width: 200px; padding: 15px 20px;
+      background: rgba(255,255,255,0.10); backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255,255,255,0.22); border-radius: 14px;
+      color: white; font-size: 15px; font-family: var(--font);
+      outline: none; transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .waitlist-input::placeholder { color: rgba(255,255,255,0.38); }
+    .waitlist-input:focus {
+      border-color: var(--green-bright);
+      background: rgba(255,255,255,0.16);
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+    }
+    .light-form .waitlist-input {
+      background: var(--bg); border-color: var(--border); color: var(--text);
+    }
+    .light-form .waitlist-input::placeholder { color: var(--muted); }
+    .light-form .waitlist-input:focus {
+      border-color: var(--green); background: white;
+      box-shadow: 0 0 0 3px rgba(22,163,74,0.12);
+    }
+    .waitlist-btn {
+      padding: 15px 26px; background: var(--green-bright); color: var(--dark2);
+      border: none; border-radius: 14px; font-size: 15px; font-weight: 800;
+      cursor: pointer; font-family: var(--font); white-space: nowrap;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 2px 16px rgba(34,197,94,0.4);
+    }
+    .waitlist-btn:hover { background: #4ade80; transform: translateY(-2px); box-shadow: 0 6px 24px rgba(34,197,94,0.5); }
+    .waitlist-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .light-form .waitlist-btn { background: var(--green); color: white; box-shadow: 0 2px 14px rgba(22,163,74,0.35); }
+    .waitlist-note { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 10px; }
+    .light-form-note { color: var(--muted); }
+    .waitlist-success { display: none; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; margin-top: 16px; color: #86efac; }
+    .waitlist-success.show { display: flex; animation: fadeUp 0.4s ease both; }
+    .waitlist-error { font-size: 13px; color: #F87171; margin-top: 8px; min-height: 18px; }
+
+    /* App store badges */
+    .hero-badges {
+      display: flex; gap: 10px; margin-top: 24px; justify-content: center; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 0.6s ease 1.6s both;
+    }
+    .store-badge {
+      display: flex; align-items: center; gap: 9px;
+      background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 12px; padding: 9px 16px; text-decoration: none; color: white;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .store-badge:hover { background: rgba(255,255,255,0.14); border-color: rgba(255,255,255,0.35); transform: translateY(-2px); }
+    .store-badge-icon { width: 20px; height: 20px; flex-shrink: 0; }
+    .store-badge-sub { font-size: 9px; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.5px; }
+    .store-badge-name { font-size: 14px; font-weight: 700; }
+
+    /* Scroll cue */
+    .scroll-cue {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.35); font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      opacity: 0; animation: fadeIn 0.6s ease 2.2s both;
+      z-index: 2;
+    }
+    .scroll-cue-arrow {
+      width: 28px; height: 28px; border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: rgba(255,255,255,0.45);
+      animation: bounceY 1.8s ease-in-out infinite;
+    }
+
+    /* ════════ TICKER ════════ */
+    .ticker-strip {
+      background: var(--green); overflow: hidden;
+      padding: 14px 0; position: relative;
+    }
+    .ticker-strip::before, .ticker-strip::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
+    }
+    .ticker-strip::before { left: 0; background: linear-gradient(to right, var(--green), transparent); }
+    .ticker-strip::after  { right: 0; background: linear-gradient(to left, var(--green), transparent); }
+    .ticker-track {
+      display: flex; width: max-content; gap: 0;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-item {
+      display: flex; align-items: center; gap: 0;
+      font-size: 13px; font-weight: 700; color: white;
+      white-space: nowrap; padding: 0 24px; letter-spacing: 0.3px;
+    }
+    .ticker-sep { color: rgba(255,255,255,0.4); margin: 0 4px; }
+
+    /* ════════ STATS ════════ */
+    .stats-strip {
+      background: var(--dark2); padding: 60px 24px; position: relative; overflow: hidden;
+    }
+    .stats-strip::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(34,197,94,0.06), transparent);
     }
     .stats-inner {
-      max-width: 860px; margin: 0 auto;
+      max-width: 900px; margin: 0 auto;
       display: grid; grid-template-columns: repeat(3, 1fr);
       text-align: center; position: relative;
     }
-    .stat { padding: 16px 24px; border-right: 1px solid rgba(255,255,255,0.22); }
+    .stat { padding: 20px 32px; border-right: 1px solid rgba(255,255,255,0.1); }
     .stat:last-child { border-right: none; }
     .stat-num {
-      font-size: 42px; font-weight: 900; color: white; letter-spacing: -2px; line-height: 1;
-      display: block;
+      font-family: var(--display); font-size: clamp(52px,7vw,88px);
+      color: white; letter-spacing: 2px; line-height: 1; display: block;
     }
-    .stat-label { font-size: 13px; color: rgba(255,255,255,0.72); margin-top: 5px; font-weight: 500; }
+    .stat-num.green { color: var(--green-bright); }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 8px; font-weight: 500; letter-spacing: 0.5px; }
 
-    /* ════════════════════════════════
-       SCENE BANNER
-    ════════════════════════════════ */
-    .scene-wrap {
-      position: relative; overflow: hidden; height: 500px;
+    /* ════════ PHOTO MARQUEE ════════ */
+    .marquee-wrap { overflow: hidden; padding: 56px 0; background: var(--bg); position: relative; }
+    .marquee-wrap::before, .marquee-wrap::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2;
     }
-    .scene-wrap img {
+    .marquee-wrap::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+    .marquee-wrap::after  { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+    .marquee-track {
+      display: flex; gap: 16px; width: max-content;
+      animation: marquee 35s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-photo {
+      width: 300px; height: 200px; flex-shrink: 0; border-radius: 16px;
+      overflow: hidden; position: relative;
+    }
+    .marquee-photo img {
       width: 100%; height: 100%; object-fit: cover;
-      display: block;
-      animation: kenBurns 18s ease-in-out infinite alternate;
+      transition: transform 0.5s ease;
+    }
+    .marquee-photo:hover img { transform: scale(1.06); }
+    .marquee-photo-label {
+      position: absolute; bottom: 12px; left: 12px;
+      background: rgba(5,46,22,0.85); backdrop-filter: blur(4px);
+      color: white; font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+      padding: 5px 10px; border-radius: 100px;
+    }
+
+    /* ════════ SCENE BANNER ════════ */
+    .scene-wrap { position: relative; overflow: hidden; height: 520px; }
+    .scene-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      animation: kenBurns 20s ease-in-out infinite alternate;
       will-change: transform;
     }
     .scene-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(105deg, rgba(5,46,22,0.9) 0%, rgba(5,46,22,0.6) 55%, rgba(5,46,22,0.18) 100%);
+      background: linear-gradient(105deg, rgba(3,15,6,0.92) 0%, rgba(5,46,22,0.65) 55%, rgba(5,46,22,0.18) 100%);
       display: flex; align-items: center;
     }
-    .scene-content {
-      max-width: 1080px; margin: 0 auto; padding: 0 56px; width: 100%;
-    }
+    .scene-content { max-width: 1080px; margin: 0 auto; padding: 0 56px; width: 100%; }
     .scene-content h2 {
-      font-size: clamp(28px, 4.8vw, 56px); font-weight: 900;
-      color: white; letter-spacing: -1.5px; line-height: 1.08; max-width: 560px;
+      font-family: var(--display);
+      font-size: clamp(40px, 6.5vw, 88px);
+      color: white; letter-spacing: 2px; line-height: 0.92; max-width: 600px;
     }
-    .scene-content h2 em { font-style: normal; color: #86efac; }
+    .scene-content h2 span { color: var(--green-bright); }
     .scene-content p {
-      font-size: 17px; color: rgba(255,255,255,0.68);
-      max-width: 420px; line-height: 1.65; margin-top: 16px;
+      font-size: 17px; color: rgba(255,255,255,0.65);
+      max-width: 420px; line-height: 1.65; margin-top: 20px;
     }
-    .scene-pills {
-      display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap;
-    }
+    .scene-pills { display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap; }
     .scene-pill {
-      background: rgba(255,255,255,0.1); backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.08); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.2);
       color: white; font-size: 13px; font-weight: 600;
       padding: 8px 16px; border-radius: 100px;
       transition: background 0.2s;
     }
-    .scene-pill:hover { background: rgba(255,255,255,0.18); }
+    .scene-pill:hover { background: rgba(255,255,255,0.16); }
 
-    /* ════════════════════════════════
-       SHARED SECTION STYLES
-    ════════════════════════════════ */
-    section { padding: 80px 24px; max-width: 1080px; margin: 0 auto; }
+    /* ════════ SHARED ════════ */
     .section-tag {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
       color: var(--green); background: var(--green-pale); border: 1px solid var(--green-border);
-      padding: 4px 12px; border-radius: 100px; margin-bottom: 16px;
+      padding: 4px 14px; border-radius: 100px; margin-bottom: 16px;
     }
+    .section-tag.light { color: #86efac; background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.25); }
     .section-title {
-      font-size: clamp(28px, 4.5vw, 46px); font-weight: 900;
-      letter-spacing: -1.5px; line-height: 1.1; max-width: 580px; color: var(--text);
+      font-family: var(--display);
+      font-size: clamp(36px, 5.5vw, 64px);
+      letter-spacing: 2px; line-height: 0.95; max-width: 640px; color: var(--text);
     }
-    .section-sub {
-      font-size: 16px; color: var(--muted); line-height: 1.7;
-      max-width: 480px; margin-top: 14px;
-    }
+    .section-title.light { color: white; }
+    .section-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 480px; margin-top: 16px; }
+    .section-sub.light { color: rgba(255,255,255,0.6); }
 
-    /* ════════════════════════════════
-       HOW IT WORKS
-    ════════════════════════════════ */
-    .how-wrap { background: var(--green-pale); border-top: 1px solid var(--green-border); border-bottom: 1px solid var(--green-border); }
-    .how-inner { max-width: 1080px; margin: 0 auto; padding: 80px 24px; }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 52px; }
+    /* ════════ HOW IT WORKS ════════ */
+    .how-wrap { background: var(--bg); padding: 96px 24px; }
+    .how-inner { max-width: 1080px; margin: 0 auto; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px; }
     .step {
-      background: var(--white); padding: 36px 30px; border-radius: 20px;
-      border: 1.5px solid var(--green-border);
-      box-shadow: 0 2px 12px var(--shadow);
-      opacity: 0; transform: translateY(28px);
+      background: var(--white); padding: 40px 32px; border-radius: 24px;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+      opacity: 0; transform: translateY(30px);
       transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.25s, border-color 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .step::before {
+      content: attr(data-num);
+      font-family: var(--display);
+      font-size: 120px; color: var(--green-pale);
+      position: absolute; right: -8px; bottom: -20px;
+      line-height: 1; letter-spacing: 2px; pointer-events: none;
     }
     .step.visible { opacity: 1; transform: translateY(0); }
-    .step:hover { box-shadow: 0 12px 36px var(--shadow); border-color: var(--green); }
-    .step-num {
-      font-size: 12px; font-weight: 800; color: var(--green);
-      background: var(--green-mid); width: 30px; height: 30px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
-    }
-    .step-icon { font-size: 34px; margin-bottom: 14px; display: block; }
-    .step h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.3px; color: var(--text); }
-    .step p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .step:hover { box-shadow: 0 12px 40px var(--shadow); border-color: var(--green-border); }
+    .step-icon { font-size: 38px; margin-bottom: 20px; display: block; }
+    .step h3 { font-size: 20px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.3px; color: var(--text); position: relative; }
+    .step p { font-size: 14px; color: var(--muted); line-height: 1.7; position: relative; }
 
-    /* ════════════════════════════════
-       COMMUNITY
-    ════════════════════════════════ */
-    .community-wrap { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 24px; }
+    /* ════════ COMMUNITY (dark) ════════ */
+    .community-wrap { background: var(--dark2); padding: 96px 24px; }
     .community-inner { max-width: 1080px; margin: 0 auto; }
-    .community-header { text-align: center; max-width: 620px; margin: 0 auto; }
-    .community-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 52px; }
+    .community-header { text-align: center; max-width: 700px; margin: 0 auto; }
+    .community-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; border-radius: 20px; overflow: hidden; }
     .community-card {
-      background: var(--green-pale); border-radius: 18px;
-      border: 1.5px solid var(--green-border); padding: 32px 26px; text-align: center;
+      background: rgba(255,255,255,0.04); padding: 44px 36px;
+      border: none; text-align: left;
       opacity: 0; transform: translateY(24px);
-      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.25s;
+      transition: opacity 0.55s ease, transform 0.55s ease, background 0.2s;
     }
     .community-card.visible { opacity: 1; transform: translateY(0); }
-    .community-card:hover { box-shadow: 0 8px 28px var(--shadow); }
-    .community-icon { font-size: 36px; margin-bottom: 14px; display: block; }
-    .community-card h3 { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 8px; letter-spacing: -0.3px; }
-    .community-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .community-card:hover { background: rgba(255,255,255,0.07); }
+    .community-icon { font-size: 40px; margin-bottom: 20px; display: block; }
+    .community-card h3 { font-size: 18px; font-weight: 800; color: white; margin-bottom: 10px; letter-spacing: -0.3px; }
+    .community-card p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+    .community-num {
+      font-family: var(--display); font-size: 13px; letter-spacing: 1.5px;
+      color: var(--green-bright); margin-bottom: 8px; display: block;
+    }
 
-    /* ════════════════════════════════
-       FEATURES
-    ════════════════════════════════ */
-    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 52px; }
+    /* ════════ FEATURES ════════ */
+    .features-wrap { background: var(--bg); padding: 96px 24px; }
+    .features-inner { max-width: 1080px; margin: 0 auto; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 60px; }
     .feature {
-      background: var(--white); padding: 30px; border-radius: 18px;
+      background: var(--white); padding: 32px 28px; border-radius: 20px;
       border: 1.5px solid var(--border);
       opacity: 0; transform: translateY(20px);
       transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s, box-shadow 0.2s;
     }
     .feature.visible { opacity: 1; transform: translateY(0); }
-    .feature:hover { border-color: var(--green-border); box-shadow: 0 8px 28px var(--shadow); }
-    .feature-icon { font-size: 28px; margin-bottom: 12px; display: block; }
-    .feature h3 { font-size: 16px; font-weight: 800; margin-bottom: 7px; letter-spacing: -0.2px; color: var(--text); }
+    .feature:hover { border-color: var(--green-border); box-shadow: 0 8px 30px var(--shadow); }
+    .feature-icon { font-size: 30px; margin-bottom: 14px; display: block; }
+    .feature h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.2px; }
     .feature p { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
-    /* ════════════════════════════════
-       MODAL
-    ════════════════════════════════ */
-    .modal-overlay {
-      display: none; position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,0.35); backdrop-filter: blur(4px);
-      align-items: center; justify-content: center; padding: 24px;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 20px; max-width: 680px; width: 100%;
-      max-height: 80vh; display: flex; flex-direction: column;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.15);
-    }
-    .modal-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 28px; border-bottom: 1px solid var(--border); flex-shrink: 0;
-    }
-    .modal-header h2 { font-size: 17px; font-weight: 800; color: var(--text); }
-    .modal-close {
-      background: none; border: none; color: var(--muted); font-size: 24px;
-      cursor: pointer; padding: 0 4px; line-height: 1; transition: color 0.2s;
-    }
-    .modal-close:hover { color: var(--text); }
-    .modal-body { padding: 22px 28px; overflow-y: auto; font-size: 14px; color: var(--muted); line-height: 1.8; }
-    .modal-body h3 { font-size: 13px; font-weight: 700; color: var(--text); margin: 20px 0 6px; }
-    .modal-body h3:first-child { margin-top: 0; }
-    .modal-body p { margin-bottom: 10px; }
-
-    /* ════════════════════════════════
-       FAQ
-    ════════════════════════════════ */
-    .faq-wrap { max-width: 720px; margin: 0 auto; padding: 80px 24px; }
-    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 8px; }
+    /* ════════ FAQ ════════ */
+    .faq-wrap { max-width: 760px; margin: 0 auto; padding: 96px 24px; }
+    .faq-list { margin-top: 52px; display: flex; flex-direction: column; gap: 8px; }
     .faq-item {
       background: var(--white); border: 1.5px solid var(--border);
       border-radius: 16px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s;
     }
     .faq-item:hover { border-color: var(--green-border); }
-    .faq-item.open { border-color: var(--green); box-shadow: 0 4px 16px var(--shadow); }
+    .faq-item.open { border-color: var(--green); box-shadow: 0 4px 20px var(--shadow); }
     .faq-question {
-      width: 100%; text-align: left; padding: 20px 22px;
+      width: 100%; text-align: left; padding: 22px 24px;
       background: none; border: none; cursor: pointer;
       font-family: var(--font); font-size: 15px; font-weight: 700; color: var(--text);
       display: flex; justify-content: space-between; align-items: center; gap: 16px;
@@ -507,110 +480,118 @@
     }
     .faq-question:hover { color: var(--green); }
     .faq-chevron {
-      font-size: 11px; color: var(--muted); flex-shrink: 0;
-      width: 24px; height: 24px; background: var(--bg); border-radius: 50%;
+      width: 26px; height: 26px; background: var(--bg); border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--muted); flex-shrink: 0;
       transition: transform 0.3s, background 0.2s, color 0.2s;
     }
     .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--green-mid); color: var(--green); }
     .faq-answer {
-      max-height: 0; overflow: hidden;
+      max-height: 0; overflow: hidden; padding: 0 24px;
+      font-size: 14px; color: var(--muted); line-height: 1.75;
       transition: max-height 0.38s ease, padding 0.2s;
-      font-size: 14px; color: var(--muted); line-height: 1.75; padding: 0 22px;
     }
-    .faq-item.open .faq-answer { max-height: 220px; padding: 0 22px 20px; }
+    .faq-item.open .faq-answer { max-height: 220px; padding: 0 24px 22px; }
 
-    /* ════════════════════════════════
-       FINAL CTA
-    ════════════════════════════════ */
+    /* ════════ CTA ════════ */
     .cta-wrap {
-      background: var(--dark);
-      padding: 100px 24px; text-align: center; position: relative; overflow: hidden;
+      background: var(--dark); padding: 110px 24px;
+      text-align: center; position: relative; overflow: hidden;
     }
     .cta-wrap::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 50% 70% at 50% 50%, rgba(34,197,94,0.13), transparent 70%);
-      animation: glowPulse 4.5s ease-in-out infinite;
-      pointer-events: none;
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 50% 60% at 50% 50%, rgba(34,197,94,0.12), transparent 70%);
+      animation: glowPulse 5s ease-in-out infinite; pointer-events: none;
     }
-    /* Subtle pitch centre-circle decoration */
+    /* Pitch centre circle in CTA */
     .cta-wrap::after {
-      content: '';
-      position: absolute; width: 600px; height: 600px;
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 50%;
+      content: ''; position: absolute;
+      width: 700px; height: 700px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.03);
       top: 50%; left: 50%; transform: translate(-50%, -50%);
       pointer-events: none;
     }
     .cta-wrap h2 {
-      font-size: clamp(32px, 5.5vw, 62px); font-weight: 900;
-      letter-spacing: -2px; line-height: 1.06; color: white; position: relative;
+      font-family: var(--display);
+      font-size: clamp(44px, 8vw, 100px);
+      letter-spacing: 3px; line-height: 0.92; color: white; position: relative;
     }
-    .cta-wrap p { font-size: 17px; color: rgba(255,255,255,0.6); margin-top: 16px; position: relative; }
+    .cta-wrap h2 span { color: var(--green-bright); }
+    .cta-wrap p { font-size: 17px; color: rgba(255,255,255,0.55); margin-top: 20px; position: relative; }
     .cta-wrap p strong { color: #86efac; }
-    .cta-form { display: flex; justify-content: center; margin-top: 44px; position: relative; }
-    .cta-wrap .waitlist-input {
-      background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.18); color: white;
-    }
-    .cta-wrap .waitlist-input::placeholder { color: rgba(255,255,255,0.38); }
-    .cta-wrap .waitlist-input:focus {
-      border-color: var(--green-light);
-      background: rgba(255,255,255,0.14);
-      box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
-    }
+    .cta-form { display: flex; justify-content: center; margin-top: 48px; position: relative; }
 
-    /* ════════════════════════════════
-       FOOTER
-    ════════════════════════════════ */
+    /* ════════ FOOTER ════════ */
     footer {
-      background: var(--dark); border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 36px 48px;
+      background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 36px 52px;
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 20px;
     }
     .footer-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
-    .footer-logo img { height: 26px; width: auto; filter: brightness(0) invert(1); opacity: 0.65; }
-    .footer-logo-text { font-size: 17px; font-weight: 900; letter-spacing: -0.3px; color: rgba(255,255,255,0.65); }
+    .footer-logo img { height: 26px; width: auto; filter: brightness(0) invert(1); opacity: 0.6; }
+    .footer-logo-text { font-size: 17px; font-weight: 900; color: rgba(255,255,255,0.6); letter-spacing: -0.3px; }
     .footer-logo-text span { color: #86efac; }
     .footer-links { display: flex; gap: 28px; }
-    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.42); text-decoration: none; transition: color 0.2s; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: rgba(255,255,255,0.8); }
-    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.28); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
 
-    /* ════════════════════════════════
-       SCROLL FADE
-    ════════════════════════════════ */
-    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    /* ════════ MODAL ════════ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 20px; max-width: 680px; width: 100%;
+      max-height: 80vh; display: flex; flex-direction: column;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.2);
+    }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 28px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .modal-header h2 { font-size: 17px; font-weight: 800; }
+    .modal-close { background: none; border: none; color: var(--muted); font-size: 24px; cursor: pointer; padding: 0 4px; line-height: 1; transition: color 0.2s; }
+    .modal-close:hover { color: var(--text); }
+    .modal-body { padding: 22px 28px; overflow-y: auto; font-size: 14px; color: var(--muted); line-height: 1.8; }
+    .modal-body h3 { font-size: 13px; font-weight: 700; color: var(--text); margin: 20px 0 6px; }
+    .modal-body h3:first-child { margin-top: 0; }
+    .modal-body p { margin-bottom: 10px; }
+
+    /* ════════ SCROLL FADE ════════ */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* ════════════════════════════════
-       RESPONSIVE
-    ════════════════════════════════ */
+    /* ════════ RESPONSIVE ════════ */
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
-      .hero-field img { height: 280px; }
-      .field-badge-2 { display: none; }
-      .field-badge-3 { font-size: 11px; padding: 8px 14px; }
-      .scene-wrap { height: 400px; }
-      .scene-content { padding: 0 24px; }
-      .stats-inner { grid-template-columns: 1fr; }
-      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding: 14px 0; }
-      .stat:last-child { border-bottom: none; }
+      nav, nav.scrolled { padding: 14px 20px; }
+      .hero h1 { font-size: clamp(64px, 18vw, 100px); }
       .steps { grid-template-columns: 1fr; }
-      .community-grid { grid-template-columns: 1fr; }
+      .community-grid { grid-template-columns: 1fr; gap: 1px; }
       .features-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; }
+      .stat:last-child { border-bottom: none; }
+      .scene-wrap { height: 420px; }
+      .scene-content { padding: 0 24px; }
       footer { flex-direction: column; text-align: center; padding: 28px 20px; }
       .footer-links { justify-content: center; flex-wrap: wrap; gap: 16px; }
       .waitlist-form { flex-direction: column; }
-      .hero-social { flex-direction: column; gap: 8px; }
-      .scroll-hint { display: none; }
+      .scroll-cue { display: none; }
+      .marquee-photo { width: 240px; height: 160px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- ── NAV ── -->
   <nav id="nav">
     <a href="#" class="nav-logo">
       <img src="logo.png" alt="Athletizer" />
@@ -619,160 +600,214 @@
     <a href="#waitlist" class="nav-cta">Get First Game Free</a>
   </nav>
 
-  <!-- HERO -->
+  <!-- ── HERO ── -->
   <div class="hero">
-    <div class="hero-badge">🇮🇪 Dublin's Pickup Football Community</div>
+    <img class="hero-bg"
+      src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1800&q=85"
+      alt="Football pitch under floodlights"
+    />
+    <div class="hero-overlay"></div>
 
-    <h1>
-      <span class="hero-line">Play Football</span>
-      <span class="hero-line">with Real People</span>
-      <span class="hero-line">Across <em>Dublin</em></span>
-    </h1>
+    <!-- SVG pitch markings drawing in -->
+    <svg class="pitch-svg" viewBox="0 0 100 62" preserveAspectRatio="xMidYMid slice">
+      <rect class="pitch-line" x="3" y="3" width="94" height="56" rx="0.3"/>
+      <line class="pitch-line" x1="50" y1="3" x2="50" y2="59"/>
+      <circle class="pitch-line" cx="50" cy="31" r="9.2"/>
+      <rect class="pitch-line" x="3" y="18" width="13.5" height="26"/>
+      <rect class="pitch-line" x="83.5" y="18" width="13.5" height="26"/>
+      <rect class="pitch-line" x="3" y="24" width="5" height="14"/>
+      <rect class="pitch-line" x="92" y="24" width="5" height="14"/>
+      <path class="pitch-line" d="M3 5 A2 2 0 0 1 5 3"/>
+      <path class="pitch-line" d="M97 5 A2 2 0 0 0 95 3"/>
+      <path class="pitch-line" d="M3 57 A2 2 0 0 0 5 59"/>
+      <path class="pitch-line" d="M97 57 A2 2 0 0 1 95 59"/>
+      <circle class="pitch-dot" cx="50" cy="31" r="0.6"/>
+      <circle class="pitch-dot" cx="13" cy="31" r="0.6"/>
+      <circle class="pitch-dot" cx="87" cy="31" r="0.6"/>
+    </svg>
 
-    <p class="hero-sub">Find local pickup games, meet players across Dublin, and just show up and play. No teams, no drama — just football.</p>
-
-    <!-- Dublin location ticker -->
-    <div class="hero-ticker">
-      <span class="ticker-label">⚽ Games running in</span>
-      <span class="ticker-location" id="ticker">Drimnagh</span>
-    </div>
-
-    <div class="hero-social">
-      <div class="avatar-stack">
-        <div class="av">⚽</div>
-        <div class="av">🏃</div>
-        <div class="av">👟</div>
-        <div class="av">🤝</div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Dublin · Est. 2026
       </div>
-      <div class="social-text">
-        200+ players already signed up
-        <span>Dublin-wide · launching soon</span>
+
+      <h1>
+        <span class="reveal-wrap hero-line-1"><span>Dublin's</span></span>
+        <span class="reveal-wrap hero-line-2"><span>Pickup Football</span></span>
+        <span class="reveal-wrap hero-line-3"><span>Community</span></span>
+      </h1>
+
+      <p class="hero-sub">Find local games, meet real players, and just show up and play. No teams, no drama — just football across Dublin.</p>
+
+      <div class="hero-ticker">
+        ⚽ &nbsp;Games running in&nbsp;
+        <span class="ticker-loc" id="ticker">Drimnagh</span>
+      </div>
+
+      <div class="hero-form-wrap">
+        <div class="promo-badge">🎁 &nbsp;Early access — <strong>first game FREE</strong> when we launch</div>
+        <form class="waitlist-form" id="hero-form">
+          <input class="waitlist-input" type="email" placeholder="Your email address" required />
+          <button class="waitlist-btn" type="submit">Claim Free Game →</button>
+        </form>
+        <p class="waitlist-error" id="hero-error"></p>
+        <div class="waitlist-success" id="hero-success">
+          <span>✅</span>&nbsp;You're on the list! First game is <strong>FREE</strong>.
+        </div>
+        <p class="waitlist-note">No spam · Unsubscribe anytime</p>
+      </div>
+
+      <div class="hero-badges">
+        <a href="#" class="store-badge">
+          <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <div>
+            <div class="store-badge-sub">Download on the</div>
+            <div class="store-badge-name">App Store</div>
+          </div>
+        </a>
+        <a href="#" class="store-badge">
+          <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3.18 23.76c.3.17.64.24.99.2L15.34 12 3.18.04c-.35-.04-.69.03-.99.2C1.57.73 1.2 1.34 1.2 2.06v19.88c0 .72.37 1.33.98 1.82zM16.34 13l2.7 2.7-12.18 6.85zM20.4 10.55l-2.57-1.45-3.01 2.9 3.01 2.9 2.6-1.46c.74-.42 1.18-1.03 1.18-1.94s-.47-1.52-1.21-1.95zM6.86 2.45l12.18 6.85-2.7 2.7z"/>
+          </svg>
+          <div>
+            <div class="store-badge-sub">Get it on</div>
+            <div class="store-badge-name">Google Play</div>
+          </div>
+        </a>
       </div>
     </div>
 
-    <div class="promo-badge">
-      <span>🎁</span> Early access — <strong>your first game is FREE</strong> when we launch
-    </div>
-
-    <form class="waitlist-form" id="hero-form">
-      <input class="waitlist-input" type="email" placeholder="Your email address" required />
-      <button class="waitlist-btn" type="submit">Claim Free Game →</button>
-    </form>
-    <p class="waitlist-error" id="hero-error"></p>
-    <div class="waitlist-success" id="hero-success">
-      <span>✅</span>&nbsp;You're on the list! Your first game is <strong>FREE</strong> when Athletizer launches.
-    </div>
-    <p class="waitlist-note">No spam. Unsubscribe anytime.</p>
-
-    <div class="store-badges">
-      <a href="#" class="store-badge">
-        <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-        </svg>
-        <span class="store-badge-text">
-          <span class="store-badge-sub">Download on the</span>
-          <span class="store-badge-name">App Store</span>
-        </span>
-      </a>
-      <a href="#" class="store-badge">
-        <svg class="store-badge-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M3.18 23.76c.3.17.64.24.99.2L15.34 12 3.18.04c-.35-.04-.69.03-.99.2C1.57.73 1.2 1.34 1.2 2.06v19.88c0 .72.37 1.33.98 1.82zM16.34 13l2.7 2.7-12.18 6.85zM20.4 10.55l-2.57-1.45-3.01 2.9 3.01 2.9 2.6-1.46c.74-.42 1.18-1.03 1.18-1.94s-.47-1.52-1.21-1.95zM6.86 2.45l12.18 6.85-2.7 2.7z"/>
-        </svg>
-        <span class="store-badge-text">
-          <span class="store-badge-sub">Get it on</span>
-          <span class="store-badge-name">Google Play</span>
-        </span>
-      </a>
-    </div>
-
-    <div class="scroll-hint">
-      Scroll to explore
-      <span class="scroll-hint-arrow">↓</span>
-    </div>
-
-    <!-- Field photo -->
-    <div class="hero-field fade-up">
-      <img
-        id="hero-field-img"
-        src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1400&q=80"
-        alt="Football pitch lit up under floodlights in Dublin"
-        loading="lazy"
-      />
-      <div class="field-badge field-badge-1">
-        <div class="field-dot"></div>
-        Live games nearby
-      </div>
-      <div class="field-badge field-badge-2">
-        ⚽ 5v5 · 7v7 · 11v11
-      </div>
-      <div class="field-badge field-badge-3">
-        📍 Across Dublin — Drimnagh · Sandymount · Clontarf · Rathmines
-      </div>
+    <div class="scroll-cue">
+      Scroll
+      <div class="scroll-cue-arrow">↓</div>
     </div>
   </div>
 
-  <!-- STATS STRIP -->
+  <!-- ── SPORTS TICKER ── -->
+  <div class="ticker-strip">
+    <div class="ticker-track">
+      <span class="ticker-item">⚽ Dublin's Pickup Football Community <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">🏃 New games every week <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">💚 All skill levels welcome <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">📍 Drimnagh · Sandymount · Rathmines · Clontarf <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">🤝 200+ players signed up <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">🎁 First game FREE for early access <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">🛡️ Full refund if cancelled <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">⚽ Dublin's Pickup Football Community <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">🏃 New games every week <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">💚 All skill levels welcome <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">📍 Drimnagh · Sandymount · Rathmines · Clontarf <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">🤝 200+ players signed up <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">🎁 First game FREE for early access <span class="ticker-sep">·</span></span>
+      <span class="ticker-item">🛡️ Full refund if cancelled <span class="ticker-sep">·</span></span>
+    </div>
+  </div>
+
+  <!-- ── STATS ── -->
   <div class="stats-strip">
     <div class="stats-inner fade-up">
       <div class="stat">
-        <span class="stat-num" data-target="200" data-suffix="+">200+</span>
+        <span class="stat-num green" data-target="200" data-suffix="+">200+</span>
         <div class="stat-label">Players signed up in Dublin</div>
       </div>
       <div class="stat">
-        <span class="stat-num">Dublin 🇮🇪</span>
-        <div class="stat-label">Launching here first</div>
+        <span class="stat-num">Dublin</span>
+        <div class="stat-label">Launching here first 🇮🇪</div>
       </div>
       <div class="stat">
-        <span class="stat-num">Free</span>
+        <span class="stat-num green">Free</span>
         <div class="stat-label">Your first game, on us</div>
       </div>
     </div>
   </div>
 
-  <!-- SCENE BANNER -->
+  <!-- ── PHOTO MARQUEE ── -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-photo">
+        <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600&q=80" alt="Football pitch at night" loading="lazy" />
+        <div class="marquee-photo-label">📍 Dublin</div>
+      </div>
+      <div class="marquee-photo">
+        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80" alt="Players in a game" loading="lazy" />
+        <div class="marquee-photo-label">⚽ 7v7</div>
+      </div>
+      <div class="marquee-photo">
+        <img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?w=600&q=80" alt="Football pitch aerial" loading="lazy" />
+        <div class="marquee-photo-label">📍 Sandymount</div>
+      </div>
+      <div class="marquee-photo">
+        <img src="https://images.unsplash.com/photo-1556056504-5c7696c4c28d?w=600&q=80" alt="Match action" loading="lazy" />
+        <div class="marquee-photo-label">⚽ 5v5</div>
+      </div>
+      <div class="marquee-photo">
+        <img src="https://images.unsplash.com/photo-1508098682722-e99c643d7ffe?w=600&q=80" alt="Players running" loading="lazy" />
+        <div class="marquee-photo-label">📍 Drimnagh</div>
+      </div>
+      <!-- duplicated for seamless loop -->
+      <div class="marquee-photo">
+        <img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600&q=80" alt="Football pitch at night" loading="lazy" />
+        <div class="marquee-photo-label">📍 Dublin</div>
+      </div>
+      <div class="marquee-photo">
+        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80" alt="Players in a game" loading="lazy" />
+        <div class="marquee-photo-label">⚽ 7v7</div>
+      </div>
+      <div class="marquee-photo">
+        <img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?w=600&q=80" alt="Football pitch aerial" loading="lazy" />
+        <div class="marquee-photo-label">📍 Sandymount</div>
+      </div>
+      <div class="marquee-photo">
+        <img src="https://images.unsplash.com/photo-1556056504-5c7696c4c28d?w=600&q=80" alt="Match action" loading="lazy" />
+        <div class="marquee-photo-label">⚽ 5v5</div>
+      </div>
+      <div class="marquee-photo">
+        <img src="https://images.unsplash.com/photo-1508098682722-e99c643d7ffe?w=600&q=80" alt="Players running" loading="lazy" />
+        <div class="marquee-photo-label">📍 Drimnagh</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCENE BANNER ── -->
   <div class="scene-wrap">
-    <img
-      src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&q=80"
-      alt="Players in a pickup football game in Dublin"
-      loading="lazy"
-    />
+    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1800&q=80" alt="Dublin players in a pickup football game" loading="lazy" />
     <div class="scene-overlay">
       <div class="scene-content fade-up">
-        <h2>Real pitches.<br/><em>Real players.</em><br/>Every week in Dublin.</h2>
-        <p>No trials, no tryouts, no teams. Just show up, play, and go home happy.</p>
+        <h2>REAL PITCHES.<br/><span>REAL PLAYERS.</span><br/>EVERY WEEK.</h2>
+        <p>No trials, no tryouts, no team drama. Just Dublin people who love football, showing up and having a game.</p>
         <div class="scene-pills">
           <span class="scene-pill">⚽ All skill levels</span>
-          <span class="scene-pill">📍 Dublin-wide</span>
-          <span class="scene-pill">🛡️ Full refund if cancelled</span>
+          <span class="scene-pill">📍 Across Dublin</span>
+          <span class="scene-pill">🛡️ Auto-refund if cancelled</span>
           <span class="scene-pill">👥 Meet new people</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- HOW IT WORKS -->
+  <!-- ── HOW IT WORKS ── -->
   <div class="how-wrap">
     <div class="how-inner">
       <div class="fade-up">
-        <div class="section-tag">⚽ How It Works</div>
+        <div class="section-tag">How It Works</div>
         <h2 class="section-title">Three steps to your next game</h2>
         <p class="section-sub">No organising, no group chats, no hassle. Just show up and play.</p>
       </div>
       <div class="steps" id="steps-row">
-        <div class="step">
-          <span class="step-num">1</span>
+        <div class="step" data-num="01">
           <span class="step-icon">🗺️</span>
           <h3>Find a Game in Dublin</h3>
-          <p>Browse pickup games across Dublin by date, skill level, and location. See who's already in before you join.</p>
+          <p>Browse pickup games across Dublin filtered by skill level, date, and location. See who's already in before you join.</p>
         </div>
-        <div class="step">
-          <span class="step-num">2</span>
+        <div class="step" data-num="02">
           <span class="step-icon">⚡</span>
           <h3>Book Your Spot</h3>
-          <p>Pay through the app in seconds and get instant confirmation. No chasing anyone, no waiting around.</p>
+          <p>Pay through the app in seconds and get instant confirmation. No chasing anyone, no Revolut requests.</p>
         </div>
-        <div class="step">
-          <span class="step-num">3</span>
+        <div class="step" data-num="03">
           <span class="step-icon">🏃</span>
           <h3>Show Up &amp; Play</h3>
           <p>Head to the pitch, meet your teammates, and kick off. Everything's sorted before you arrive.</p>
@@ -781,122 +816,127 @@
     </div>
   </div>
 
-  <!-- COMMUNITY -->
+  <!-- ── COMMUNITY (dark) ── -->
   <div class="community-wrap">
     <div class="community-inner">
       <div class="community-header fade-up">
-        <div class="section-tag">🤝 Built for Dublin</div>
-        <h2 class="section-title" style="max-width:100%;">Football is better when you know the people</h2>
-        <p class="section-sub" style="max-width:100%; margin: 14px auto 0;">Athletizer isn't just a booking app — it's how Dublin's football community finds each other.</p>
+        <div class="section-tag light">Built for Dublin</div>
+        <h2 class="section-title light">Football is better when you know the people</h2>
+        <p class="section-sub light" style="max-width:520px; margin: 16px auto 0;">Athletizer isn't just a booking app — it's how Dublin's football community finds each other.</p>
       </div>
       <div class="community-grid" id="community-row">
         <div class="community-card">
+          <span class="community-num">01</span>
           <span class="community-icon">👋</span>
           <h3>Meet Players Like You</h3>
-          <p>Every game is full of Dubliners who just want a good run. See who's playing, make connections, build regulars.</p>
+          <p>Every game is full of Dubliners who just want a good run. Make connections, build regulars, stop showing up alone.</p>
         </div>
         <div class="community-card">
+          <span class="community-num">02</span>
           <span class="community-icon">📍</span>
           <h3>Across All of Dublin</h3>
-          <p>Games in Drimnagh, Sandymount, Clontarf, Rathmines and more. Always something near you.</p>
+          <p>Drimnagh, Sandymount, Clontarf, Rathmines, Terenure, Crumlin and more. Find something near you, whenever you're free.</p>
         </div>
         <div class="community-card">
+          <span class="community-num">03</span>
           <span class="community-icon">💬</span>
-          <h3>Group Chat Before Kickoff</h3>
-          <p>Every game has its own chat. Sort out lifts, decide on bibs or skins, or just break the ice.</p>
+          <h3>Chat Before Kickoff</h3>
+          <p>Every game has its own chat. Sort lifts, decide bibs or skins, share the meeting spot, break the ice.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FEATURES -->
-  <section>
-    <div class="fade-up">
-      <div class="section-tag">✨ Features</div>
-      <h2 class="section-title">Everything you need to play more football</h2>
-      <p class="section-sub">Built for players who just want to play — not manage logistics.</p>
+  <!-- ── FEATURES ── -->
+  <div class="features-wrap">
+    <div class="features-inner">
+      <div class="fade-up">
+        <div class="section-tag">Features</div>
+        <h2 class="section-title">Everything you need to play more</h2>
+        <p class="section-sub">Built for players who just want to play — not manage logistics.</p>
+      </div>
+      <div class="features-grid" id="features-row">
+        <div class="feature">
+          <span class="feature-icon">🗺️</span>
+          <h3>Games Near You</h3>
+          <p>All upcoming games in Dublin, sorted by distance. Filter by skill level so you're always in the right match.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">💬</span>
+          <h3>In-Game Chat</h3>
+          <p>Every game has a group chat. Coordinate meetup spots, share pitch directions, get to know your team before kickoff.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">👛</span>
+          <h3>Built-In Wallet</h3>
+          <p>Top up and pay for games instantly. Automatic refunds if a game doesn't go ahead — no chasing.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🏆</span>
+          <h3>Skill-Based Matching</h3>
+          <p>Tag your level — beginner, intermediate, or competitive. Always the right crowd, always a fair game.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🔔</span>
+          <h3>Smart Notifications</h3>
+          <p>Get notified when a spot opens in a full game, when yours is confirmed, and a reminder before kickoff.</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">👥</span>
+          <h3>Bring Your Mates</h3>
+          <p>Pay for a friend's spot in the same game. Never show up to something new without a familiar face.</p>
+        </div>
+      </div>
     </div>
-    <div class="features-grid" id="features-row">
-      <div class="feature">
-        <span class="feature-icon">🗺️</span>
-        <h3>Games Near You</h3>
-        <p>See all upcoming games in Dublin sorted by distance. Filter by skill level so you're always in the right match.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon">💬</span>
-        <h3>In-Game Chat</h3>
-        <p>Every game has a group chat. Coordinate meetup spots, share pitch directions, get to know your team before kickoff.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon">👛</span>
-        <h3>Built-In Wallet</h3>
-        <p>Top up your wallet and pay for games instantly. Automatic refunds if a game doesn't go ahead.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon">🏆</span>
-        <h3>Skill-Based Games</h3>
-        <p>Tag your level and find the right game — beginner, intermediate, or competitive. Always the right crowd.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon">🔔</span>
-        <h3>Smart Notifications</h3>
-        <p>Get notified when a spot opens, when your game is confirmed, and a reminder before kickoff.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon">👥</span>
-        <h3>Bring Your Mates</h3>
-        <p>Pay for a friend's spot in the same game. Never show up to a new game alone when you don't have to.</p>
-      </div>
-    </div>
-  </section>
+  </div>
 
-  <!-- FAQ -->
+  <!-- ── FAQ ── -->
   <div class="faq-wrap">
     <div class="fade-up">
-      <div class="section-tag">💡 FAQ</div>
+      <div class="section-tag">FAQ</div>
       <h2 class="section-title">Common questions</h2>
     </div>
     <div class="faq-list fade-up">
       <div class="faq-item">
         <button class="faq-question">Do I need to be experienced to join? <span class="faq-chevron">▾</span></button>
-        <div class="faq-answer">Not at all. Athletizer welcomes all skill levels. Games clearly show the intensity level so you can pick what feels right.</div>
+        <div class="faq-answer">Not at all. Athletizer welcomes all skill levels. Games clearly show the intensity so you can pick what feels right for you.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">Is this a league or team thing? <span class="faq-chevron">▾</span></button>
+        <button class="faq-question">Is this a league or a team thing? <span class="faq-chevron">▾</span></button>
         <div class="faq-answer">No. It's casual pickup football in Dublin — no seasons, no standings, no weekly obligations. Just turn up when you feel like it.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-question">How do I know what kind of game I'm joining? <span class="faq-chevron">▾</span></button>
-        <div class="faq-answer">Each game shows the location, format (5v5, 7v7 etc.), skill level, and any notes from the organiser. No surprises on the day.</div>
+        <button class="faq-question">How do I know what I'm joining? <span class="faq-chevron">▾</span></button>
+        <div class="faq-answer">Each game shows the location, format (5v5, 7v7 etc.), skill level, and notes from the organiser. No surprises on the day.</div>
       </div>
       <div class="faq-item">
         <button class="faq-question">Can I join if I haven't played in a while? <span class="faq-chevron">▾</span></button>
-        <div class="faq-answer">Absolutely. A lot of people join Athletizer to get back into football after a break. There's a game at every level across Dublin.</div>
+        <div class="faq-answer">Absolutely. Lots of people join Athletizer to get back into football after a break. There's a game at every level in Dublin.</div>
       </div>
       <div class="faq-item">
         <button class="faq-question">What happens if a game gets cancelled? <span class="faq-chevron">▾</span></button>
-        <div class="faq-answer">If a game is cancelled or doesn't fill up, you get a full automatic refund. No chasing, no awkward messages.</div>
+        <div class="faq-answer">You get a full automatic refund. No chasing, no awkward messages — the money is back in your wallet instantly.</div>
       </div>
     </div>
   </div>
 
-  <!-- FINAL CTA -->
+  <!-- ── CTA ── -->
   <div class="cta-wrap" id="waitlist">
-    <h2 class="fade-up">Your first game is on us.</h2>
-    <p class="fade-up">Sign up for early access — when we launch in Dublin, your first game is <strong>FREE</strong>.</p>
+    <h2 class="fade-up">YOUR FIRST<br/><span>GAME IS FREE.</span></h2>
+    <p class="fade-up">Sign up now — when we launch in Dublin, your first game is on us. <strong>No commitments.</strong></p>
     <div class="cta-form fade-up">
-      <form class="waitlist-form no-anim" id="cta-form">
+      <form class="waitlist-form light-form no-anim" id="cta-form">
         <input class="waitlist-input" type="email" placeholder="Your email address" required />
         <button class="waitlist-btn" type="submit">Claim Free Game →</button>
       </form>
     </div>
-    <p class="waitlist-error" id="cta-error" style="color:#86efac; position:relative;"></p>
-    <div class="waitlist-success" id="cta-success" style="justify-content:center; margin-top:20px; color:#86efac; position:relative;">
-      <span>✅</span>&nbsp;You're on the list! Your first game is <strong>FREE</strong> when Athletizer launches.
+    <p class="waitlist-error" id="cta-error" style="color:#86efac; position:relative; margin-top:10px;"></p>
+    <div class="waitlist-success" id="cta-success" style="justify-content:center; margin-top:16px; color:#86efac; position:relative;">
+      <span>✅</span>&nbsp;You're on the list! First game is <strong>FREE</strong>.
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- ── FOOTER ── -->
   <footer>
     <a href="#" class="footer-logo">
       <img src="logo.png" alt="Athletizer" />
@@ -918,26 +958,15 @@
         <button class="modal-close" id="privacy-close">&times;</button>
       </div>
       <div class="modal-body">
-        <h3>Overview</h3>
-        <p>Athletizer collects and uses personal information to provide its sports-booking service. By using Athletizer, you agree to the practices described in this policy.</p>
-        <h3>Data We Collect</h3>
-        <p>We collect information you provide directly, including your name, email address, profile photo, and any other details you add to your profile. When you use the app, we also collect location data (GPS-based) to show games near you in Dublin, device information, usage analytics, push notification tokens, wallet and payment activity, and game history.</p>
-        <h3>How We Use Your Data</h3>
-        <p>We use your information to operate and improve the Athletizer platform, match you with nearby games in Dublin, process payments and refunds through your wallet, send notifications about games, messages, and bookings, provide customer support, and analyze usage trends to improve the experience.</p>
-        <h3>Data Sharing</h3>
-        <p>We do not sell or rent your personal data. Information may be shared with third-party service providers that help us operate the platform (such as Supabase for data storage and PayPal for payments), legal authorities when required by law, and successor companies in the event of a merger or acquisition.</p>
-        <h3>Your Rights</h3>
-        <p>You can access, update, or delete your account information at any time through the app. To request full data deletion, contact us at <a href="mailto:infoathletizer@gmail.com" style="color:var(--green);">infoathletizer@gmail.com</a>.</p>
-        <h3>Location Data</h3>
-        <p>Athletizer uses your location only while the app is in use to show games near you. We do not track your location in the background.</p>
-        <h3>Children</h3>
-        <p>Athletizer is not intended for users under the age of 13. We do not knowingly collect data from children.</p>
-        <h3>Security</h3>
-        <p>We use industry-standard safeguards including HTTPS and encryption to protect your data. No system is completely secure, and we cannot guarantee absolute security.</p>
-        <h3>Changes to This Policy</h3>
-        <p>We may update this policy from time to time. Changes will be posted here and, where appropriate, communicated through the app.</p>
-        <h3>Contact</h3>
-        <p>Questions? Reach us at <a href="mailto:infoathletizer@gmail.com" style="color:var(--green);">infoathletizer@gmail.com</a>.</p>
+        <h3>Overview</h3><p>Athletizer collects and uses personal information to provide its sports-booking service. By using Athletizer, you agree to the practices described in this policy.</p>
+        <h3>Data We Collect</h3><p>We collect information you provide directly, including your name, email address, profile photo, and any other details you add to your profile. When you use the app, we also collect location data (GPS-based) to show games near you in Dublin, device information, usage analytics, push notification tokens, wallet and payment activity, and game history.</p>
+        <h3>How We Use Your Data</h3><p>We use your information to operate and improve the Athletizer platform, match you with nearby games in Dublin, process payments and refunds through your wallet, send notifications about games, messages, and bookings, provide customer support, and analyze usage trends to improve the experience.</p>
+        <h3>Data Sharing</h3><p>We do not sell or rent your personal data. Information may be shared with third-party service providers (such as Supabase for data storage and PayPal for payments), legal authorities when required by law, and successor companies in the event of a merger or acquisition.</p>
+        <h3>Your Rights</h3><p>You can access, update, or delete your account information at any time through the app. To request full data deletion, contact us at <a href="mailto:infoathletizer@gmail.com" style="color:var(--green);">infoathletizer@gmail.com</a>.</p>
+        <h3>Location Data</h3><p>Athletizer uses your location only while the app is in use to show games near you. We do not track your location in the background.</p>
+        <h3>Children</h3><p>Athletizer is not intended for users under the age of 13. We do not knowingly collect data from children.</p>
+        <h3>Security</h3><p>We use industry-standard safeguards including HTTPS and encryption to protect your data.</p>
+        <h3>Contact</h3><p>Questions? Reach us at <a href="mailto:infoathletizer@gmail.com" style="color:var(--green);">infoathletizer@gmail.com</a>.</p>
         <p style="margin-top:24px;font-size:12px;">Last updated: March 2026</p>
       </div>
     </div>
@@ -951,46 +980,33 @@
         <button class="modal-close" id="terms-close">&times;</button>
       </div>
       <div class="modal-body">
-        <h3>1. Acceptance of Terms</h3>
-        <p>By accessing or using Athletizer, you agree to be bound by these Terms &amp; Conditions. If you do not agree, please do not use the platform.</p>
-        <h3>2. Platform Use</h3>
-        <p>Athletizer is a platform for discovering and joining casual pickup football games in Dublin. You agree to use the platform only for lawful purposes and in a way that does not infringe on the rights of others.</p>
-        <h3>3. Eligibility</h3>
-        <p>You must be at least 18 years old to create an account. By using Athletizer, you confirm that you meet this requirement.</p>
-        <h3>4. User Conduct</h3>
-        <p>You are responsible for your behavior at any game booked through Athletizer. Athletizer expects all participants to treat others with respect. Disruptive, dangerous, or abusive behavior may result in removal from the platform.</p>
-        <h3>5. Payments &amp; Refunds</h3>
-        <p>Payments are processed securely through the app. If a game is cancelled or does not reach the minimum number of players, you will receive a full refund automatically. Refunds for voluntary cancellations are subject to the cancellation policy set by the game organizer.</p>
-        <h3>6. Assumption of Risk</h3>
-        <p>Participation in physical sports activities carries inherent risks. By booking and attending a game through Athletizer, you acknowledge and accept these risks. Athletizer is not liable for any injury, loss, or damage arising from participation.</p>
-        <h3>7. Limitation of Liability</h3>
-        <p>Athletizer is not responsible for the actions of individual users or game organizers. We do not guarantee the quality, safety, or accuracy of any game listing. Your use of the platform is at your own risk.</p>
-        <h3>8. Privacy</h3>
-        <p>We collect and use your data in accordance with our Privacy Policy. By using Athletizer, you consent to this data use.</p>
-        <h3>9. Changes to Terms</h3>
-        <p>We may update these Terms at any time. Continued use of Athletizer after changes are posted constitutes acceptance of the revised Terms.</p>
-        <h3>10. Contact</h3>
-        <p>Questions about these Terms? Reach us at <a href="mailto:infoathletizer@gmail.com" style="color:var(--green);">infoathletizer@gmail.com</a>.</p>
+        <h3>1. Acceptance of Terms</h3><p>By accessing or using Athletizer, you agree to be bound by these Terms &amp; Conditions. If you do not agree, please do not use the platform.</p>
+        <h3>2. Platform Use</h3><p>Athletizer is a platform for discovering and joining casual pickup football games in Dublin. You agree to use the platform only for lawful purposes.</p>
+        <h3>3. Eligibility</h3><p>You must be at least 18 years old to create an account. By using Athletizer, you confirm that you meet this requirement.</p>
+        <h3>4. User Conduct</h3><p>You are responsible for your behavior at any game booked through Athletizer. Disruptive, dangerous, or abusive behavior may result in removal from the platform.</p>
+        <h3>5. Payments &amp; Refunds</h3><p>Payments are processed securely through the app. If a game is cancelled or does not reach the minimum number of players, you will receive a full refund automatically.</p>
+        <h3>6. Assumption of Risk</h3><p>Participation in physical sports activities carries inherent risks. By booking and attending a game through Athletizer, you acknowledge and accept these risks.</p>
+        <h3>7. Limitation of Liability</h3><p>Athletizer is not responsible for the actions of individual users or game organizers. Your use of the platform is at your own risk.</p>
+        <h3>8. Privacy</h3><p>We collect and use your data in accordance with our Privacy Policy.</p>
+        <h3>9. Changes to Terms</h3><p>We may update these Terms at any time. Continued use of Athletizer after changes are posted constitutes acceptance of the revised Terms.</p>
+        <h3>10. Contact</h3><p>Questions? Reach us at <a href="mailto:infoathletizer@gmail.com" style="color:var(--green);">infoathletizer@gmail.com</a>.</p>
         <p style="margin-top:24px;font-size:12px;">Last updated: March 2026</p>
       </div>
     </div>
   </div>
 
   <script>
-    /* ── NAV shadow on scroll ── */
+    /* ── NAV: transparent → white on scroll ── */
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      nav.classList.toggle('scrolled', y > 20);
-      nav.style.padding = y > 50 ? '11px 48px' : '16px 48px';
-
-      /* Parallax on hero field image */
-      const img = document.getElementById('hero-field-img');
-      if (img) img.style.transform = `translateY(${Math.min(y * 0.12, 60)}px)`;
-    });
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+      nav.style.padding = window.scrollY > 60
+        ? (window.innerWidth > 768 ? '12px 52px' : '12px 20px')
+        : (window.innerWidth > 768 ? '20px 52px' : '20px 20px');
+    }, { passive: true });
 
     /* ── Dublin location ticker ── */
-    const locations = ['Drimnagh', 'Sandymount', 'Rathmines', 'Clontarf', 'Terenure', 'Crumlin', 'Ringsend', 'Glasnevin', 'Ballsbridge'];
+    const locations = ['Drimnagh', 'Sandymount', 'Rathmines', 'Clontarf', 'Terenure', 'Crumlin', 'Ringsend', 'Glasnevin', 'Ballsbridge', 'Cabra'];
     let locIdx = 0;
     const locEl = document.getElementById('ticker');
     setInterval(() => {
@@ -1001,114 +1017,104 @@
         locEl.textContent = locations[locIdx];
         locEl.style.opacity = '1';
         locEl.style.transform = 'translateY(0)';
-      }, 280);
-    }, 2200);
+      }, 240);
+    }, 2400);
 
-    /* ── Generic fade-up on scroll ── */
-    const fadeObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          fadeObserver.unobserve(entry.target);
+    /* ── Generic scroll fade ── */
+    const fadeObs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          fadeObs.unobserve(e.target);
         }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
 
-    /* ── Stagger: steps ── */
-    const staggerObserver = new IntersectionObserver((entries) => {
+    /* ── Staggered card groups ── */
+    const cardObs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.step, .community-card, .feature').forEach((card, i) => {
-            setTimeout(() => card.classList.add('visible'), i * 130);
+          entry.target.querySelectorAll('.step, .community-card, .feature').forEach((c, i) => {
+            setTimeout(() => c.classList.add('visible'), i * 140);
           });
-          staggerObserver.unobserve(entry.target);
+          cardObs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08 });
     ['steps-row', 'community-row', 'features-row'].forEach(id => {
       const el = document.getElementById(id);
-      if (el) staggerObserver.observe(el);
+      if (el) cardObs.observe(el);
     });
 
     /* ── Counter animation ── */
-    function animateCounter(el, target, suffix = '') {
-      const duration = 1800;
-      const start = performance.now();
-      const update = (now) => {
-        const t = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - t, 3);
-        el.textContent = Math.floor(eased * target) + suffix;
-        if (t < 1) requestAnimationFrame(update);
+    function animateCount(el, target, suffix) {
+      const dur = 2000, start = performance.now();
+      const run = now => {
+        const t = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.floor(ease * target) + suffix;
+        if (t < 1) requestAnimationFrame(run);
       };
-      requestAnimationFrame(update);
+      requestAnimationFrame(run);
     }
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const target = parseInt(el.dataset.target, 10);
-          const suffix = el.dataset.suffix || '';
-          animateCounter(el, target, suffix);
-          counterObserver.unobserve(el);
+    const cntObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting && e.target.dataset.target) {
+          animateCount(e.target, parseInt(e.target.dataset.target), e.target.dataset.suffix || '');
+          cntObs.unobserve(e.target);
         }
       });
     }, { threshold: 0.5 });
-    document.querySelectorAll('.stat-num[data-target]').forEach(el => counterObserver.observe(el));
+    document.querySelectorAll('[data-target]').forEach(el => cntObs.observe(el));
 
-    /* ── Waitlist submission ── */
-    const EDGE_FN_URL = 'https://cuhhcwqquvspyinhxgzk.supabase.co/functions/v1/waitlist-signup';
-
+    /* ── Waitlist forms ── */
+    const EDGE = 'https://cuhhcwqquvspyinhxgzk.supabase.co/functions/v1/waitlist-signup';
     async function submitWaitlist(form, successEl, errorEl) {
       const email = form.querySelector('input[type="email"]').value;
       const btn = form.querySelector('button');
-      const originalText = btn.textContent;
+      const orig = btn.textContent;
       btn.disabled = true; btn.textContent = 'Sending...';
       errorEl.textContent = '';
       try {
-        const res = await fetch(EDGE_FN_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        const res = await fetch(EDGE, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email }),
         });
         if (!res.ok) throw new Error();
       } catch {
-        btn.disabled = false; btn.textContent = originalText;
+        btn.disabled = false; btn.textContent = orig;
         errorEl.textContent = 'Something went wrong. Please try again.';
         return;
       }
       form.style.display = 'none';
-      errorEl.style.display = 'none';
       successEl.classList.add('show');
-      const note = document.querySelector('.waitlist-note');
-      if (note) note.style.display = 'none';
     }
-
-    document.getElementById('hero-form').addEventListener('submit', async (e) => {
+    document.getElementById('hero-form').addEventListener('submit', e => {
       e.preventDefault();
-      await submitWaitlist(e.target, document.getElementById('hero-success'), document.getElementById('hero-error'));
+      submitWaitlist(e.target, document.getElementById('hero-success'), document.getElementById('hero-error'));
     });
-    document.getElementById('cta-form').addEventListener('submit', async (e) => {
+    document.getElementById('cta-form').addEventListener('submit', e => {
       e.preventDefault();
-      await submitWaitlist(e.target, document.getElementById('cta-success'), document.getElementById('cta-error'));
+      submitWaitlist(e.target, document.getElementById('cta-success'), document.getElementById('cta-error'));
     });
 
     /* ── Modals ── */
-    const privacyModal = document.getElementById('privacy-modal');
-    document.getElementById('privacy-close').addEventListener('click', () => privacyModal.classList.remove('open'));
-    privacyModal.addEventListener('click', (e) => { if (e.target === privacyModal) privacyModal.classList.remove('open'); });
+    const privModal = document.getElementById('privacy-modal');
+    document.getElementById('privacy-close').addEventListener('click', () => privModal.classList.remove('open'));
+    privModal.addEventListener('click', e => { if (e.target === privModal) privModal.classList.remove('open'); });
 
     const termsModal = document.getElementById('terms-modal');
     document.getElementById('terms-close').addEventListener('click', () => termsModal.classList.remove('open'));
-    termsModal.addEventListener('click', (e) => { if (e.target === termsModal) termsModal.classList.remove('open'); });
+    termsModal.addEventListener('click', e => { if (e.target === termsModal) termsModal.classList.remove('open'); });
 
-    /* ── FAQ accordion ── */
+    /* ── FAQ ── */
     document.querySelectorAll('.faq-question').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.closest('.faq-item');
-        const isOpen = item.classList.contains('open');
+        const open = item.classList.contains('open');
         document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!isOpen) item.classList.add('open');
+        if (!open) item.classList.add('open');
       });
     });
   </script>
