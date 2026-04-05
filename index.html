@@ -63,19 +63,18 @@
     .hero {
       min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; justify-content: center; text-align: center;
-      padding: 120px 24px 80px; position: relative; overflow: hidden;
+      padding: 120px 24px 0; position: relative; overflow: hidden;
       background: var(--white);
     }
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 90% 55% at 50% 0%, #dcfce7 0%, transparent 65%);
+      background: radial-gradient(ellipse 90% 55% at 50% 0%, #dcfce7 0%, transparent 60%);
       pointer-events: none;
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--green-mid);
-      border: 1.5px solid var(--green-border);
+      background: var(--green-mid); border: 1.5px solid var(--green-border);
       color: #15803D; font-size: 13px; font-weight: 700;
       padding: 7px 18px; border-radius: 100px; margin-bottom: 32px; position: relative;
     }
@@ -89,8 +88,6 @@
       font-size: clamp(16px, 2.2vw, 19px); color: var(--muted);
       max-width: 500px; line-height: 1.7; margin-top: 20px; position: relative;
     }
-
-    /* Player avatars */
     .hero-social {
       display: flex; align-items: center; gap: 12px;
       margin-top: 36px; position: relative;
@@ -163,6 +160,31 @@
     .store-badge-sub { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
     .store-badge-name { font-size: 14px; font-weight: 700; letter-spacing: -0.3px; }
 
+    /* ── HERO FIELD IMAGE ── */
+    .hero-field {
+      width: 100%; max-width: 1100px;
+      margin: 56px auto 0;
+      position: relative;
+    }
+    .hero-field img {
+      width: 100%; height: 460px; object-fit: cover;
+      border-radius: 28px 28px 0 0;
+      display: block;
+    }
+    /* Pill badges floating on the image */
+    .field-badge {
+      position: absolute; display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+      border-radius: 100px; padding: 10px 18px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      font-size: 13px; font-weight: 700; color: var(--text);
+    }
+    .field-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; animation: pulse 2s infinite; }
+    .field-badge-1 { top: 28px; left: 32px; }
+    .field-badge-2 { top: 28px; right: 32px; }
+    .field-badge-3 { bottom: 32px; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+    @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.4); } }
+
     /* ── STATS STRIP ── */
     .stats-strip { background: var(--green); padding: 44px 24px; }
     .stats-inner {
@@ -174,6 +196,100 @@
     .stat:last-child { border-right: none; }
     .stat-num { font-size: 38px; font-weight: 900; color: white; letter-spacing: -1.5px; line-height: 1; }
     .stat-label { font-size: 13px; color: rgba(255,255,255,0.72); margin-top: 5px; font-weight: 500; }
+
+    /* ── SCENE BANNER ── */
+    .scene-wrap {
+      position: relative; overflow: hidden; height: 480px;
+    }
+    .scene-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .scene-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(5,46,22,0.88) 0%, rgba(5,46,22,0.55) 60%, rgba(5,46,22,0.2) 100%);
+      display: flex; align-items: center;
+    }
+    .scene-content {
+      max-width: 1080px; margin: 0 auto; padding: 0 48px;
+      width: 100%;
+    }
+    .scene-content h2 {
+      font-size: clamp(28px, 4.5vw, 52px); font-weight: 900;
+      color: white; letter-spacing: -1.5px; line-height: 1.1;
+      max-width: 560px;
+    }
+    .scene-content h2 em { font-style: normal; color: #86efac; }
+    .scene-content p {
+      font-size: 17px; color: rgba(255,255,255,0.7);
+      max-width: 440px; line-height: 1.6; margin-top: 16px;
+    }
+    .scene-pills {
+      display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap;
+    }
+    .scene-pill {
+      background: rgba(255,255,255,0.12); backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white; font-size: 13px; font-weight: 600;
+      padding: 8px 16px; border-radius: 100px;
+    }
+
+    /* ── GAME CARDS PREVIEW ── */
+    .games-wrap { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 24px; }
+    .games-inner { max-width: 1080px; margin: 0 auto; }
+    .games-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; flex-wrap: wrap; gap: 12px; }
+    .games-header-note { font-size: 13px; color: var(--muted); font-style: italic; }
+    .games-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .game-card {
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .game-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px var(--shadow); border-color: var(--green-border); }
+    .game-thumb {
+      height: 160px; background-size: cover; background-position: center;
+      position: relative;
+    }
+    .game-thumb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 40%, rgba(5,46,22,0.6) 100%);
+    }
+    .game-thumb-badge {
+      position: absolute; top: 12px; left: 12px;
+      font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 100px;
+      letter-spacing: 0.3px;
+    }
+    .badge-all { background: white; color: var(--green); }
+    .badge-inter { background: #FFF7ED; color: #C2410C; }
+    .badge-beg { background: var(--green-mid); color: var(--green-hover); }
+    .game-spots {
+      position: absolute; bottom: 12px; right: 12px;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(4px);
+      border-radius: 100px; padding: 4px 10px;
+      font-size: 12px; font-weight: 700; color: var(--text);
+    }
+    .game-info { padding: 18px 20px 20px; }
+    .game-title { font-size: 16px; font-weight: 800; color: var(--text); letter-spacing: -0.3px; margin-bottom: 10px; }
+    .game-meta { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+    .game-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+    }
+    .game-players-bar { flex: 1; }
+    .game-players-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-bottom: 5px; }
+    .game-bar { height: 5px; background: var(--green-mid); border-radius: 100px; overflow: hidden; }
+    .game-bar-fill { height: 100%; background: var(--green); border-radius: 100px; }
+    .game-price {
+      font-size: 18px; font-weight: 900; color: var(--green); letter-spacing: -0.5px; margin-left: 16px;
+    }
+    .game-price span { font-size: 11px; font-weight: 600; color: var(--muted); display: block; text-align: right; margin-top: 1px; }
+    .games-cta-note {
+      text-align: center; margin-top: 32px;
+      font-size: 14px; color: var(--muted);
+    }
+    .games-cta-note a { color: var(--green); font-weight: 700; text-decoration: none; }
+    .games-cta-note a:hover { text-decoration: underline; }
 
     /* ── SHARED SECTION ── */
     section { padding: 80px 24px; max-width: 1080px; margin: 0 auto; }
@@ -212,13 +328,11 @@
     .step h3 { font-size: 18px; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.3px; color: var(--text); }
     .step p { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
-    /* ── COMMUNITY STRIP ── */
+    /* ── COMMUNITY ── */
     .community-wrap { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 24px; }
     .community-inner { max-width: 1080px; margin: 0 auto; }
     .community-header { text-align: center; max-width: 600px; margin: 0 auto; }
-    .community-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 52px;
-    }
+    .community-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 52px; }
     .community-card {
       background: var(--green-pale); border-radius: 18px;
       border: 1.5px solid var(--green-border); padding: 32px 26px; text-align: center;
@@ -228,13 +342,10 @@
     .community-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
     /* ── FEATURES ── */
-    .features-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 52px;
-    }
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 52px; }
     .feature {
-      background: var(--white); padding: 30px;
-      border-radius: 18px; border: 1.5px solid var(--border);
-      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+      background: var(--white); padding: 30px; border-radius: 18px;
+      border: 1.5px solid var(--border); box-shadow: 0 1px 6px rgba(0,0,0,0.04);
       transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
     .feature:hover { border-color: var(--green-border); transform: translateY(-2px); box-shadow: 0 6px 20px var(--shadow); }
@@ -346,14 +457,23 @@
     .footer-copy { font-size: 12px; color: rgba(255,255,255,0.28); }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
+      .hero-field img { height: 280px; border-radius: 20px 20px 0 0; }
+      .field-badge-2 { display: none; }
+      .field-badge-3 { bottom: 16px; font-size: 12px; padding: 8px 14px; }
+      .scene-wrap { height: 380px; }
+      .scene-content { padding: 0 24px; }
       .stats-inner { grid-template-columns: 1fr; }
       .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding: 14px 0; }
       .stat:last-child { border-bottom: none; }
       .steps { grid-template-columns: 1fr; }
       .community-grid { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
+      .games-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; padding: 28px 20px; }
       .footer-links { justify-content: center; flex-wrap: wrap; gap: 16px; }
       .waitlist-form { flex-direction: column; }
@@ -429,6 +549,25 @@
         </span>
       </a>
     </div>
+
+    <!-- Field photo anchoring the hero to reality -->
+    <div class="hero-field fade-up">
+      <img
+        src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1400&q=80"
+        alt="Football pitch lit up at night in Dublin"
+        loading="lazy"
+      />
+      <div class="field-badge field-badge-1">
+        <div class="dot"></div>
+        Live games nearby
+      </div>
+      <div class="field-badge field-badge-2">
+        ⚽ 5v5 · 7v7 · 11v11
+      </div>
+      <div class="field-badge field-badge-3">
+        📍 Drimnagh · Sandymount · Clontarf · Rathmines · and more
+      </div>
+    </div>
   </div>
 
   <!-- STATS STRIP -->
@@ -449,13 +588,113 @@
     </div>
   </div>
 
+  <!-- SCENE BANNER — real people, real games -->
+  <div class="scene-wrap">
+    <img
+      src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&q=80"
+      alt="Players in a pickup football game"
+      loading="lazy"
+    />
+    <div class="scene-overlay">
+      <div class="scene-content fade-up">
+        <h2>Real pitches.<br/><em>Real players.</em><br/>Every week.</h2>
+        <p>No trials, no tryouts, no teams. Just show up, play, and go home happy.</p>
+        <div class="scene-pills">
+          <span class="scene-pill">⚽ All skill levels</span>
+          <span class="scene-pill">📍 Dublin-wide</span>
+          <span class="scene-pill">🛡️ Full refund if cancelled</span>
+          <span class="scene-pill">👥 Meet new people</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPCOMING GAMES PREVIEW -->
+  <div class="games-wrap">
+    <div class="games-inner">
+      <div class="games-header fade-up">
+        <div>
+          <div class="section-tag">📅 Upcoming Games</div>
+          <h2 class="section-title" style="margin-top:0;">This is what it looks like</h2>
+        </div>
+        <div class="games-header-note">Mock preview — real games coming soon</div>
+      </div>
+      <div class="games-grid fade-up">
+
+        <div class="game-card">
+          <div class="game-thumb" style="background-image:url('https://images.unsplash.com/photo-1459865264687-595d652de67e?w=600&q=80')">
+            <div class="game-thumb-overlay"></div>
+            <span class="game-thumb-badge badge-all">All Levels</span>
+            <span class="game-spots">6/10 spots</span>
+          </div>
+          <div class="game-info">
+            <div class="game-title">5v5 Pickup · Drimnagh</div>
+            <div class="game-meta">📅 Tue 8 Apr · 7:00 PM</div>
+            <div class="game-meta">📍 Pearse Park, D12</div>
+            <div class="game-footer">
+              <div class="game-players-bar">
+                <div class="game-players-label">6 of 10 spots filled</div>
+                <div class="game-bar"><div class="game-bar-fill" style="width:60%"></div></div>
+              </div>
+              <div class="game-price">€8 <span>per person</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <div class="game-thumb" style="background-image:url('https://images.unsplash.com/photo-1556056504-5c7696c4c28d?w=600&q=80')">
+            <div class="game-thumb-overlay"></div>
+            <span class="game-thumb-badge badge-inter">Intermediate</span>
+            <span class="game-spots">9/14 spots</span>
+          </div>
+          <div class="game-info">
+            <div class="game-title">7v7 · Sandymount</div>
+            <div class="game-meta">📅 Sat 12 Apr · 10:00 AM</div>
+            <div class="game-meta">📍 Sandymount Strand Fields</div>
+            <div class="game-footer">
+              <div class="game-players-bar">
+                <div class="game-players-label">9 of 14 spots filled</div>
+                <div class="game-bar"><div class="game-bar-fill" style="width:64%"></div></div>
+              </div>
+              <div class="game-price">€10 <span>per person</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <div class="game-thumb" style="background-image:url('https://images.unsplash.com/photo-1508098682722-e99c643d7ffe?w=600&q=80')">
+            <div class="game-thumb-overlay"></div>
+            <span class="game-thumb-badge badge-beg">Beginner Friendly</span>
+            <span class="game-spots">3/12 spots</span>
+          </div>
+          <div class="game-info">
+            <div class="game-title">6v6 · Rathmines</div>
+            <div class="game-meta">📅 Thu 10 Apr · 6:30 PM</div>
+            <div class="game-meta">📍 Palmerston Park</div>
+            <div class="game-footer">
+              <div class="game-players-bar">
+                <div class="game-players-label">3 of 12 spots filled</div>
+                <div class="game-bar"><div class="game-bar-fill" style="width:25%"></div></div>
+              </div>
+              <div class="game-price">€9 <span>per person</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <p class="games-cta-note">
+        These drop into your phone the moment the app launches. <a href="#waitlist">Get notified →</a>
+      </p>
+    </div>
+  </div>
+
   <!-- HOW IT WORKS -->
   <div class="how-wrap">
     <div class="how-inner">
       <div class="fade-up">
         <div class="section-tag">⚽ How It Works</div>
         <h2 class="section-title">Three steps to your next game</h2>
-        <p class="section-sub">No organising, no group chats, no awkward Revolts. Just show up and play.</p>
+        <p class="section-sub">No organising, no group chats, no hassle. Just show up and play.</p>
       </div>
       <div class="steps fade-up">
         <div class="step">
@@ -617,35 +856,25 @@
       <div class="modal-body">
         <h3>Overview</h3>
         <p>Athletizer collects and uses personal information to provide its sports-booking service. By using Athletizer, you agree to the practices described in this policy.</p>
-
         <h3>Data We Collect</h3>
         <p>We collect information you provide directly, including your name, email address, profile photo, and any other details you add to your profile. When you use the app, we also collect location data (GPS-based) to show games near you, device information, usage analytics, push notification tokens, wallet and payment activity, and game history.</p>
-
         <h3>How We Use Your Data</h3>
         <p>We use your information to operate and improve the Athletizer platform, match you with nearby games, process payments and refunds through your wallet, send notifications about games, messages, and bookings, provide customer support, and analyze usage trends to improve the experience.</p>
-
         <h3>Data Sharing</h3>
         <p>We do not sell or rent your personal data. Information may be shared with third-party service providers that help us operate the platform (such as Supabase for data storage and PayPal for payments), legal authorities when required by law, and successor companies in the event of a merger or acquisition.</p>
-
         <h3>Your Rights</h3>
-        <p>You can access, update, or delete your account information at any time through the app. To request full data deletion, contact us at <a href="mailto:infoathletizer@gmail.com" style="color: var(--green);">infoathletizer@gmail.com</a>.</p>
-
+        <p>You can access, update, or delete your account information at any time through the app. To request full data deletion, contact us at <a href="mailto:infoathletizer@gmail.com" style="color:var(--green);">infoathletizer@gmail.com</a>.</p>
         <h3>Location Data</h3>
         <p>Athletizer uses your location only while the app is in use to show games near you. We do not track your location in the background.</p>
-
         <h3>Children</h3>
         <p>Athletizer is not intended for users under the age of 13. We do not knowingly collect data from children.</p>
-
         <h3>Security</h3>
         <p>We use industry-standard safeguards including HTTPS and encryption to protect your data. No system is completely secure, and we cannot guarantee absolute security.</p>
-
         <h3>Changes to This Policy</h3>
         <p>We may update this policy from time to time. Changes will be posted here and, where appropriate, communicated through the app.</p>
-
         <h3>Contact</h3>
-        <p>Questions? Reach us at <a href="mailto:infoathletizer@gmail.com" style="color: var(--green);">infoathletizer@gmail.com</a>.</p>
-
-        <p style="margin-top: 24px; font-size: 12px;">Last updated: March 2026</p>
+        <p>Questions? Reach us at <a href="mailto:infoathletizer@gmail.com" style="color:var(--green);">infoathletizer@gmail.com</a>.</p>
+        <p style="margin-top:24px;font-size:12px;">Last updated: March 2026</p>
       </div>
     </div>
   </div>
@@ -660,35 +889,25 @@
       <div class="modal-body">
         <h3>1. Acceptance of Terms</h3>
         <p>By accessing or using Athletizer, you agree to be bound by these Terms &amp; Conditions. If you do not agree, please do not use the platform.</p>
-
         <h3>2. Platform Use</h3>
         <p>Athletizer is a platform for discovering and joining casual pickup sports games. You agree to use the platform only for lawful purposes and in a way that does not infringe on the rights of others.</p>
-
         <h3>3. Eligibility</h3>
         <p>You must be at least 18 years old to create an account. By using Athletizer, you confirm that you meet this requirement.</p>
-
         <h3>4. User Conduct</h3>
         <p>You are responsible for your behavior at any game booked through Athletizer. Athletizer expects all participants to treat others with respect. Disruptive, dangerous, or abusive behavior may result in removal from the platform.</p>
-
         <h3>5. Payments &amp; Refunds</h3>
         <p>Payments are processed securely through the app. If a game is cancelled or does not reach the minimum number of players, you will receive a full refund automatically. Refunds for voluntary cancellations are subject to the cancellation policy set by the game organizer.</p>
-
         <h3>6. Assumption of Risk</h3>
         <p>Participation in physical sports activities carries inherent risks. By booking and attending a game through Athletizer, you acknowledge and accept these risks. Athletizer is not liable for any injury, loss, or damage arising from participation.</p>
-
         <h3>7. Limitation of Liability</h3>
         <p>Athletizer is not responsible for the actions of individual users or game organizers. We do not guarantee the quality, safety, or accuracy of any game listing. Your use of the platform is at your own risk.</p>
-
         <h3>8. Privacy</h3>
         <p>We collect and use your data in accordance with our Privacy Policy. By using Athletizer, you consent to this data use.</p>
-
         <h3>9. Changes to Terms</h3>
         <p>We may update these Terms at any time. Continued use of Athletizer after changes are posted constitutes acceptance of the revised Terms.</p>
-
         <h3>10. Contact</h3>
-        <p>Questions about these Terms? Reach us at <a href="mailto:infoathletizer@gmail.com" style="color: var(--green);">infoathletizer@gmail.com</a>.</p>
-
-        <p style="margin-top: 24px; font-size: 12px;">Last updated: March 2026</p>
+        <p>Questions about these Terms? Reach us at <a href="mailto:infoathletizer@gmail.com" style="color:var(--green);">infoathletizer@gmail.com</a>.</p>
+        <p style="margin-top:24px;font-size:12px;">Last updated: March 2026</p>
       </div>
     </div>
   </div>
